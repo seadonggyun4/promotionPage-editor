@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useWebViewDownload } from "../hook/useWebViewDownload";
+import backgroundImage from  '../../../asset/img/rendingPage.png'
 
 interface DonloadBtnProps {
     uploadedImage: string | ArrayBuffer | null; // 적절한 타입 지정
-    backgroundImage: string;
 }
 
-function DonloadBtn({uploadedImage, backgroundImage}: DonloadBtnProps) {
+function DonloadBtn({uploadedImage}: DonloadBtnProps) {
     const { webViewDownload } = useWebViewDownload(uploadedImage, backgroundImage);
 
     return (

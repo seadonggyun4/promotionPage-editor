@@ -6,7 +6,6 @@ import ContentPanel from "./layouts/ContentPanel";
 import Webview from "../features/landingPageDonland/components/Webview";
 import DonloadBtn from '../features/landingPageDonland/components/DonloadBtn'
 
-import backgroundImage from  '../asset/img/rendingPage.png'
 import { useUploadImageContext } from "../features/uploadImage/provider/UploadImageContext";
 
 function Main(){
@@ -15,7 +14,7 @@ function Main(){
     return(
         <MainStyle>
             <Header />
-            <Menu children={<DonloadBtn uploadedImage={uploadedImage} backgroundImage={backgroundImage}/>}/>
+            <Menu children={<DonloadBtn uploadedImage={uploadedImage} />}/>
             <ContentStyle>
                 <ContentPanel />
                <Webview uploadedImage={uploadedImage} />
