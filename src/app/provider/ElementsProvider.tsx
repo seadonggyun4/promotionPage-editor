@@ -1,18 +1,17 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { useElements } from '../hook/useElements'; // Adjust the path as necessary
+import { useElements, UseElementsReturnType } from '../hook/useElements'; // Adjust the path as necessary
 
-interface ElementsContextType {
-    elements: React.ReactNode[];
-    createSampleButton: (ButtonComponent: React.ReactNode) => void;
-}
+// 컨텍스트 타입을 useElements의 반환값과 일치시키기
+interface ElementsContextType extends UseElementsReturnType {}
 
 const ElementsContext = createContext<ElementsContextType | undefined>(undefined);
 
 export const ElementsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const { elements, createSampleButton } = useElements();
+    // useElements의 반환값을 구조 분해 할당으로 받기
+    const elementsContextValue = useElements();
 
     return (
-        <ElementsContext.Provider value={{ elements, createSampleButton }}>
+        <ElementsContext.Provider value={elementsContextValue}>
             {children}
         </ElementsContext.Provider>
     );

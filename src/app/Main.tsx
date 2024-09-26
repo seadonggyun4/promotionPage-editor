@@ -14,7 +14,7 @@ import { useUploadImageContext } from "../features/uploadImage/provider/UploadIm
 
 function Main(){
     const { uploadedImage } = useUploadImageContext();
-    const { elements } = useElementsContext();
+    const { elementsData } = useElementsContext();
     const { isActive, activeMenu } = useMenu()
 
     return(
@@ -23,7 +23,7 @@ function Main(){
             <Menu menuActive={isActive} menuClick={activeMenu} children={<DonloadBtn uploadedImage={uploadedImage} />}/>
             <ContentStyle>
                 <ContentPanel menuActive={isActive}/>
-               <Webview elements={elements} uploadedImage={uploadedImage} />
+               <Webview elementsData={elementsData} uploadedImage={uploadedImage} />
             </ContentStyle>
         </MainStyle>
     )
