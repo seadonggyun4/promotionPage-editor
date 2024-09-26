@@ -6,17 +6,19 @@ import ContentPanel from "./layouts/ContentPanel";
 import Webview from "../features/landingPageDonland/components/Webview";
 import DonloadBtn from '../features/landingPageDonland/components/DonloadBtn'
 
+import { useMenu } from "./hook/useMenu";
 import { useUploadImageContext } from "../features/uploadImage/provider/UploadImageContext";
 
 function Main(){
     const { uploadedImage } = useUploadImageContext();
+    const { isActive, activeMenu } = useMenu()
 
     return(
         <MainStyle>
             <Header />
-            <Menu children={<DonloadBtn uploadedImage={uploadedImage} />}/>
+            <Menu menuActive={isActive} menuClick={activeMenu} children={<DonloadBtn uploadedImage={uploadedImage} />}/>
             <ContentStyle>
-                <ContentPanel />
+                <ContentPanel menuActive={isActive}/>
                <Webview uploadedImage={uploadedImage} />
             </ContentStyle>
         </MainStyle>

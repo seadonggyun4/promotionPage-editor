@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
 import UploadArea from '../../features/uploadImage/components/UploadArea'
+import {menu} from "../contents/contents";
 
-function ContentPanel() {
+interface ContentPanelProps {
+    menuActive : string,
+}
+
+function ContentPanel({menuActive} :ContentPanelProps) {
     return(
         <ContentPanelStyle>
-            <UploadArea />
+            { menu[0] ===  menuActive ? <UploadArea /> : '' }
         </ContentPanelStyle>
     )
 }

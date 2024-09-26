@@ -1,16 +1,22 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
+import { menu } from "../contents/contents";
 
 interface MenuProps {
-    children?: ReactNode; // children을 선택적으로 설정
+    menuActive : string,
+    menuClick : Function,
+    children?: ReactNode;
 }
 
-function Menu({ children = null }: MenuProps) {
+function Menu({ menuActive, menuClick, children = null }: MenuProps) {
     return (
         <MenuStyle>
             <ul>
-                <li className="active">페이지 이미지 업로드</li>
-                <li>버튼</li>
+                {menu && menu.map((item, index) => (
+                    <li key={index} className={item === menuActive ? "active" : ""} onClick={() => {menuClick(item)}}>
+                        {item}
+                    </li>
+                ))}
             </ul>
             <div>
                 {children}
