@@ -1,16 +1,20 @@
 import styled from "styled-components";
 
+// components
 import Header from './layouts/Header'
 import Menu from './layouts/Menu'
 import ContentPanel from "./layouts/ContentPanel";
 import Webview from "../features/landingPageDonland/components/Webview";
 import DonloadBtn from '../features/landingPageDonland/components/DonloadBtn'
 
+// hook & provider
 import { useMenu } from "./hook/useMenu";
-import { useUploadImageContext } from "../features/uploadImage/provider/UploadImageContext";
+import { useElementsContext } from "../app/provider/ElementsProvider";
+import { useUploadImageContext } from "../features/uploadImage/provider/UploadImageProvider";
 
 function Main(){
     const { uploadedImage } = useUploadImageContext();
+    const { elements } = useElementsContext();
     const { isActive, activeMenu } = useMenu()
 
     return(
@@ -19,7 +23,7 @@ function Main(){
             <Menu menuActive={isActive} menuClick={activeMenu} children={<DonloadBtn uploadedImage={uploadedImage} />}/>
             <ContentStyle>
                 <ContentPanel menuActive={isActive}/>
-               <Webview uploadedImage={uploadedImage} />
+               <Webview elements={elements} uploadedImage={uploadedImage} />
             </ContentStyle>
         </MainStyle>
     )

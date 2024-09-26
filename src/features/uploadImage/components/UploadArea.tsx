@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import {useUploadImageContext} from "../provider/UploadImageContext";
+import {useUploadImageContext} from "../provider/UploadImageProvider";
 
 function UploadArea(){
     const { handleDrop, handleDragOver } = useUploadImageContext();
