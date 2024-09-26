@@ -8,7 +8,6 @@ function ButtonBox() {
 
     const selectBtn = () => {
         createSampleButton(<SampleBtn>샘플 버튼</SampleBtn>); // SampleBtn을 매개변수로 전달
-        console.log("버튼 추가됨");
     };
 
     return (

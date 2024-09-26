@@ -9,7 +9,7 @@ interface WebviewProps {
 
 function Webview ({elements, uploadedImage}: WebviewProps) {
     return (
-        <WebViewStyle className="webview">
+        <WebViewStyle id="rendingPage">
             <img
                 id="rending"
                 src={uploadedImage ? uploadedImage.toString() : backgroundImage}
