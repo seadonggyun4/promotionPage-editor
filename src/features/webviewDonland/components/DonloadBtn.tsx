@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useWebViewDownload } from "../hook/useWebViewDownload";
-import backgroundImage from  '../../../asset/img/rendingPage.png'
+import backgroundImage from  '../../../asset/img/promotionPage.jpeg'
 
 interface DonloadBtnProps {
     uploadedImage: string | ArrayBuffer | null; // 적절한 타입 지정

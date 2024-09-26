@@ -4,8 +4,8 @@ import styled from "styled-components";
 import Header from './layouts/Header'
 import Menu from './layouts/Menu'
 import ContentPanel from "./layouts/ContentPanel";
-import Webview from "../features/landingPageDonland/components/Webview";
-import DonloadBtn from '../features/landingPageDonland/components/DonloadBtn'
+import Webview from "../features/webviewDonland/components/Webview";
+import DonloadBtn from '../features/webviewDonland/components/DonloadBtn'
 
 // hook & provider
 import { useMenu } from "./hook/useMenu";

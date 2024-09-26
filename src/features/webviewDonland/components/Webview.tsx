@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backgroundImage from "../../../asset/img/rendingPage.png";
+import backgroundImage from "../../../asset/img/promotionPage.jpeg";
 import React, { useState } from "react";
 import { useElementsContext } from "../../../app/provider/ElementsProvider";
 

@@ -11,7 +11,7 @@ export const useWebViewDownload = (uploadedImage: string | ArrayBuffer | null, b
 
             const image = clone.querySelector('#rending') as HTMLImageElement;
             if (image) {
-                image.src = uploadedImage ? uploadedImage.toString() : './rendingPage.png';
+                image.src = uploadedImage ? uploadedImage.toString() : './promotionPage.jpeg';
             }
 
             // CSS 스타일을 포함하는 부분
@@ -52,7 +52,7 @@ export const useWebViewDownload = (uploadedImage: string | ArrayBuffer | null, b
             fetch(imageSrc)
                 .then(response => response.blob())
                 .then(blob => {
-                    zip.file('rendingPage.png', blob, { binary: true });
+                    zip.file('promotionPage.jpeg', blob, { binary: true });
                     return zip.generateAsync({ type: 'blob' });
                 })
                 .then(content => {

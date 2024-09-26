@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Header (){
     return (
         <HeaderStyle>
-            <h1>Rending Page Editor</h1>
+            <h1>Promotion Page Editor</h1>
         </HeaderStyle>
     )
 }
