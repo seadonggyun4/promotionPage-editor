@@ -38,14 +38,19 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
         e.preventDefault(); // 기본 동작 방지
         const id = e.dataTransfer.getData("id"); // 드래그한 요소의 id 가져오기
 
-        // ElementsBox의 위치 및 크기를 가져옴
-        const boundingRect = e.currentTarget.getBoundingClientRect();
+        const boundingRect = e.currentTarget.getBoundingClientRect(); // ElementsBox의 위치 및 크기를 가져옴
+        const parentWidth = boundingRect.width; // 부모 컨테이너의 너비
+        const parentHeight = boundingRect.height; // 부모 컨테이너의 높이
 
-        // 드롭된 좌표에서 ElementsBox의 좌표를 뺀 상대적 좌표 계산
-        const x = e.clientX - boundingRect.left - dragOffset.x; // 오프셋을 적용한 X 좌표 (ElementsBox 기준)
-        const y = e.clientY - boundingRect.top - dragOffset.y; // 오프셋을 적용한 Y 좌표 (ElementsBox 기준)
+        // 드롭된 좌표에서 ElementsBox의 좌표를 뺀 상대적 좌표 계산 (px 단위)
+        const xPx = e.clientX - boundingRect.left - dragOffset.x;
+        const yPx = e.clientY - boundingRect.top - dragOffset.y;
 
-        updateElementPosition(id, x, y); // 요소의 새로운 위치 업데이트
+        // 상대적인 % 좌표로 변환
+        const xPercent = (xPx / parentWidth) * 100;
+        const yPercent = (yPx / parentHeight) * 100;
+
+        updateElementPosition(id, xPercent, yPercent); // 요소의 새로운 위치를 %로 업데이트
     };
 
     // 드래그 중에는 기본 동작 방지를 해줍니다.
@@ -65,7 +70,7 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
                     <ElementWrap
                         draggable
                         key={index}
-                        style={{ top: data.y, left: data.x}} // 요소의 위치와 absolute 속성 설정
+                        style={{ top: `${data.y}%`, left: `${data.x}%` }} // 요소의 위치를 %로 설정
                         onDragStart={(e) => handleDragStart(e, data.id, data.x, data.y)} // 드래그 시작 시 오프셋 계산
                     >
                         {data.element} {/* 요소 렌더링 */}
@@ -75,6 +80,7 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
         </WebViewStyle>
     );
 }
+
 
 // 스타일 컴포넌트 정의
 const WebViewStyle = styled.section`
