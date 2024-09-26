@@ -55,33 +55,34 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
     };
 
     return (
-        <WebViewStyle id="rendingPage">
-            <WebViewImage
-                id="rending"
-                src={uploadedImage ? uploadedImage.toString() : backgroundImage}
-                alt="프로모션 페이지 이미지"
-            />
-            <ElementsBox id="elementsBox" onDragOver={handleDragOver} onDrop={handleDrop}>
-                {elementsData.map((data, index) => (
-                    <ElementWrap
-                        draggable
-                        key={index}
-                        style={{ top: `${data.y}%`, left: `${data.x}%` }}
-                        onDragStart={(e) => handleDragStart(e, data.id, data.x, data.y)}
-                    >
-                        {data.element}
-                    </ElementWrap>
-                ))}
-            </ElementsBox>
-        </WebViewStyle>
+        <div id="rendingPage">
+            <WebViewStyle>
+                <WebViewImage
+                    id="rending"
+                    src={uploadedImage ? uploadedImage.toString() : backgroundImage}
+                    alt="프로모션 페이지 이미지"
+                />
+                <ElementsBox id="elementsBox" onDragOver={handleDragOver} onDrop={handleDrop}>
+                    {elementsData.map((data, index) => (
+                        <ElementWrap
+                            draggable
+                            key={index}
+                            style={{ top: `${data.y}%`, left: `${data.x}%` }}
+                            onDragStart={(e) => handleDragStart(e, data.id, data.x, data.y)}
+                        >
+                            {data.element}
+                        </ElementWrap>
+                    ))}
+                </ElementsBox>
+            </WebViewStyle>
+        </div>
     );
 }
 
 const WebViewStyle = styled.section`
     position: relative;
-    padding-bottom: 6rem;
     width: 100%;
-    height: 100%;
+    height: auto;
     background: #ffff;
 `;
 
