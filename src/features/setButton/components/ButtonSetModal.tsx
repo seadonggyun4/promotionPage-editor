@@ -21,6 +21,9 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
     const [buttonLink, setButtonLink] = useState('');
     const [textColor, setTextColor] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('');
+    const [borderRadius, setBorderRadius] = useState('');
+    const [borderWidth, setBorderWidth] = useState('');
+    const [borderColor, setBorderColor] = useState('');
 
     const customButton = React.cloneElement(children, {
         children: buttonText || children.props.children,
@@ -28,6 +31,8 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
         style: {
             color: textColor,
             backgroundColor,
+            borderRadius: `${borderRadius}px`,
+            border: `${borderWidth}px solid ${borderColor}`,
         },
     });
 
@@ -38,6 +43,9 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
     const handleLinkChange = handleInputChange(setButtonLink);
     const handleTextColorChange = handleInputChange(setTextColor);
     const handleBackgroundColorChange = handleInputChange(setBackgroundColor);
+    const handleBorderRadiusChange = handleInputChange(setBorderRadius);
+    const handleBorderWidthChange = handleInputChange(setBorderWidth);
+    const handleBorderColorChange = handleInputChange(setBorderColor);
 
     const menuClick = (item: string) => setMenuActive(item)
 
@@ -94,6 +102,25 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                                     type="color"
                                     style={{visibility: 'hidden'}}
                                     onChange={handleBackgroundColorChange}
+                                />
+                            </div>
+                        </SettingForm>
+                    }
+                    {
+                        menuActive === menu[2] &&
+                        <SettingForm>
+                            <StyledLabel>테두리 곡선</StyledLabel>
+                            <input type="range" onChange={handleBorderRadiusChange}/>
+                            <StyledLabel>테두리 두께</StyledLabel>
+                            <input type="range" onChange={handleBorderWidthChange}/>
+                            <StyledLabel>테두리 색상</StyledLabel>
+                            <div style={{position: 'relative', marginBottom: '1.5rem'}}>
+                                <StyledColorLabel htmlFor="borderColorInput" style={{backgroundColor:borderColor}}/>
+                                <input
+                                    id="borderColorInput"
+                                    type="color"
+                                    style={{visibility: 'hidden'}}
+                                    onChange={handleBorderColorChange}
                                 />
                             </div>
                         </SettingForm>
