@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { menu } from "../contents/contents";
+import { menu } from "../../contents/contents";
 
 interface MenuProps {
     menuActive : string,

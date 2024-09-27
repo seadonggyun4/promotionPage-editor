@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import UploadArea from '../../features/uploadImage/components/UploadArea'
 import ButtonBox from "../../features/setButton/components/ButtonBox";
-import {menu} from "../contents/contents";
+import {menu} from "../../contents/contents";
 
 interface ContentPanelProps {
     menuActive : string,
