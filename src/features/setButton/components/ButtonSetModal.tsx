@@ -21,9 +21,13 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
     const [buttonLink, setButtonLink] = useState('');
     const [textColor, setTextColor] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('');
-    const [borderRadius, setBorderRadius] = useState('');
-    const [borderWidth, setBorderWidth] = useState('');
+    const [borderRadius, setBorderRadius] = useState('0');
+    const [borderWidth, setBorderWidth] = useState('0');
     const [borderColor, setBorderColor] = useState('');
+    const [shadowOffsetX, setShadowOffsetX] = useState('0');
+    const [shadowOffsetY, setShadowOffsetY] = useState('0');
+    const [shadowBlurRadius, setShadowBlurRadius] = useState('0');
+    const [shadowColor, setShadowColor] = useState('#000');
 
     const customButton = React.cloneElement(children, {
         children: buttonText || children.props.children,
@@ -33,6 +37,7 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
             backgroundColor,
             borderRadius: `${borderRadius}px`,
             border: `${borderWidth}px solid ${borderColor}`,
+            boxShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlurRadius}px ${shadowColor}`,
         },
     });
 
@@ -46,6 +51,10 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
     const handleBorderRadiusChange = handleInputChange(setBorderRadius);
     const handleBorderWidthChange = handleInputChange(setBorderWidth);
     const handleBorderColorChange = handleInputChange(setBorderColor);
+    const handleShadowOffsetXChange = handleInputChange(setShadowOffsetX);
+    const handleShadowOffsetYChange = handleInputChange(setShadowOffsetY);
+    const handleShadowBlurRadiusChange = handleInputChange(setShadowBlurRadius);
+    const handleShadowColorChange = handleInputChange(setShadowColor);
 
     const menuClick = (item: string) => setMenuActive(item)
 
@@ -110,12 +119,24 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                         menuActive === menu[2] &&
                         <SettingForm>
                             <StyledLabel>테두리 곡선</StyledLabel>
-                            <input type="range" onChange={handleBorderRadiusChange}/>
+                            <input
+                                type="range"
+                                min="0"
+                                max="50"
+                                value={borderRadius}
+                                onChange={handleBorderRadiusChange}
+                            />
                             <StyledLabel>테두리 두께</StyledLabel>
-                            <input type="range" onChange={handleBorderWidthChange}/>
+                            <input
+                                type="range"
+                                min="0"
+                                max="30"
+                                value={borderWidth}
+                                onChange={handleBorderWidthChange}
+                            />
                             <StyledLabel>테두리 색상</StyledLabel>
-                            <div style={{position: 'relative', marginBottom: '1.5rem'}}>
-                                <StyledColorLabel htmlFor="borderColorInput" style={{backgroundColor:borderColor}}/>
+                            <div style={{position: 'relative'}}>
+                                <StyledColorLabel htmlFor="borderColorInput" style={{backgroundColor: borderColor}}/>
                                 <input
                                     id="borderColorInput"
                                     type="color"
@@ -125,8 +146,29 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                             </div>
                         </SettingForm>
                     }
+                    {
+                        menuActive === menu[3] &&
+                        <SettingForm>
+                            <StyledLabel>그림자 X축</StyledLabel>
+                            <input type="range" min="0" max="20" value={shadowOffsetX} onChange={handleShadowOffsetXChange}/>
+                            <StyledLabel>그림자 Y축</StyledLabel>
+                            <input type="range" min="0" max="20" value={shadowOffsetY} onChange={handleShadowOffsetYChange}/>
+                            <StyledLabel>그림자 Z축</StyledLabel>
+                            <input type="range" min="0" max="20" value={shadowBlurRadius} onChange={handleShadowBlurRadiusChange}/>
+                            <StyledLabel>그림자 색상</StyledLabel>
+                            <div style={{position: 'relative'}}>
+                                <StyledColorLabel htmlFor="shadowColorInput" style={{backgroundColor: shadowColor}}/>
+                                <input
+                                    id="shadowColorInput"
+                                    type="color"
+                                    style={{visibility: 'hidden'}}
+                                    onChange={handleShadowColorChange}
+                                />
+                            </div>
+                        </SettingForm>
+                    }
                     <BtnWrapper>
-                        <button className="activeBtn" onClick={addButton}>등록</button>
+                    <button className="activeBtn" onClick={addButton}>등록</button>
                         <button className="cancelBtn" onClick={closeModal}>취소</button>
                     </BtnWrapper>
                 </ElementSettingBox>
