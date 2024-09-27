@@ -6,15 +6,20 @@ import { useElementsContext } from "../../..//app/provider/ElementsProvider";
 function ButtonBox() {
     const { createSampleButton } = useElementsContext()
 
-    const selectBtn = () => {
-        createSampleButton(<SampleBtn>샘플 버튼</SampleBtn>); // SampleBtn을 매개변수로 전달
+    const selectBtn = (buttonType : 'SampleBtn' | 'GradationBtn') => {
+        const buttonComponents = {
+            SampleBtn: <SampleBtn>샘플 버튼</SampleBtn>,
+            GradationBtn: <GradationBtn>그라데이션 버튼</GradationBtn>,
+        };
+
+        createSampleButton(buttonComponents[buttonType])
     };
 
     return (
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
-            <SampleBtn onClick={selectBtn}>샘플 버튼</SampleBtn>
-            <GradationBtn onClick={selectBtn}>샘플 버튼</GradationBtn>
+            <SampleBtn onClick={() => selectBtn('SampleBtn')}>샘플 버튼</SampleBtn>
+            <GradationBtn onClick={() => selectBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
         </ButtonBoxStyle>
     );
 }
