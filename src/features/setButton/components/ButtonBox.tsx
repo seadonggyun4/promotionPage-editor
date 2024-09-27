@@ -7,18 +7,18 @@ function ButtonBox() {
     const [selectedBtn, setSelectedBtn] = useState<'SampleBtn' | 'GradationBtn' | null>(null);
 
     const buttonComponents = {
-        SampleBtn: <SampleBtn target="_blank">심플 버튼</SampleBtn>,
+        SampleBtn: <SimpleBtn target="_blank">심플 버튼</SimpleBtn>,
         GradationBtn: <GradationBtn target="_blank">그라데이션 버튼</GradationBtn>,
     };
 
     return (
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
-            <SampleBtn onClick={() => setSelectedBtn('SampleBtn')}>심플 버튼</SampleBtn>
+            <SimpleBtn onClick={() => setSelectedBtn('SampleBtn')}>심플 버튼</SimpleBtn>
             <GradationBtn onClick={() => setSelectedBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
             {
                 selectedBtn &&
-                <ButtonSetModal closeModal={() => setSelectedBtn(null)}>
+                <ButtonSetModal selectedBtn={selectedBtn} closeModal={() => setSelectedBtn(null)}>
                     {buttonComponents[selectedBtn]}
                 </ButtonSetModal>
             }
@@ -39,8 +39,8 @@ const Title = styled.h2`
     font-size: 1rem;
     font-weight: bold;
 `
-
-const SampleBtn = styled.a`
+// SimpleBtn
+const SimpleBtn = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,6 +58,7 @@ const SampleBtn = styled.a`
     }
 `;
 
+// GradationBtn
 const GradationBtn = styled.a`
     display: flex;
     justify-content: center;
