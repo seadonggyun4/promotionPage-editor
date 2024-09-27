@@ -65,10 +65,11 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
                 <ElementsBox id="elementsBox" onDragOver={handleDragOver} onDrop={handleDrop}>
                     {elementsData.map((data, index) => (
                         <ElementWrap
-                            draggable
+                            id={`elementWrap`}
                             key={index}
-                            style={{ top: `${data.y}%`, left: `${data.x}%` }}
+                            style={{ top: `${data.y}%`, left: `${data.x}%`, width: '200px', height:'50px' }}
                             onDragStart={(e) => handleDragStart(e, data.id, data.x, data.y)}
+                            draggable
                         >
                             {data.element}
                         </ElementWrap>

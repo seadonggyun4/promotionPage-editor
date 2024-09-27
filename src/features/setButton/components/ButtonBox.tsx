@@ -38,8 +38,8 @@ const SampleBtn = styled.button`
     justify-content: center;
     align-items: center;
     padding: 1.5rem 0;
-    width: 200px;
-    height: 20px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     background-color: var(--c-accent-primary);
     color: #ffffff;
@@ -56,8 +56,8 @@ const GradationBtn = styled.button`
     justify-content: center;
     align-items: center;
     padding: 1.5rem 0;
-    width: 200px;
-    height: 20px;
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
     background: linear-gradient(90deg, rgba(64,64,137,1) 35%, rgba(67,76,232,1) 100%);
     color: #ffffff;
