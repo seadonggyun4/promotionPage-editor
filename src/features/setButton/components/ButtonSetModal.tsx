@@ -10,7 +10,8 @@ interface ButtonSetModalProps {
 const menu = [
     '텍스트 & 링크',
     '색상',
-    '모양'
+    '테두리',
+    '그림자'
 ]
 
 function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
@@ -97,10 +98,10 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                             </div>
                         </SettingForm>
                     }
-                    <div>
-                        <button onClick={addButton}>등록</button>
-                        <button onClick={closeModal}>취소</button>
-                    </div>
+                    <BtnWrapper>
+                        <button className="activeBtn" onClick={addButton}>등록</button>
+                        <button className="cancelBtn" onClick={closeModal}>취소</button>
+                    </BtnWrapper>
                 </ElementSettingBox>
             </ModalInner>
         </ModalWrapper>
@@ -168,6 +169,7 @@ const ModalMenu = styled.ul`
         border-bottom-color: var(--c-accent-primary);
     }
 `
+// global form style
 const StyledLabel = styled.label`
     color: var(--c-text-action);
     text-transform: uppercase;
@@ -179,9 +181,9 @@ const SettingForm = styled.div`
     flex-direction: column;
     row-gap: 0.5rem;
     height: 100%;
-    max-height: 300px;
+    max-height: 350px;
 `;
-// testSetting
+// textSetting
 const StyledInput = styled.input`
     margin-bottom: 1.5rem;
     padding: 0.5rem;
@@ -209,5 +211,28 @@ const StyledColorLabel = styled.label`
         border: 2px solid var(--c-accent-primary);
     }
 `;
+// btnWrap
+const BtnWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+    
+    & .activeBtn, & .cancelBtn{
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+    }
+
+    & .activeBtn:hover{
+        color: #ffffff;
+        background-color: var(--c-accent-primary);
+    }
+
+    & .cancelBtn:hover{
+        color: #ffffff;
+        background-color: var(--c-accent-warning);
+    }
+`
 
 export default ButtonSetModal;
