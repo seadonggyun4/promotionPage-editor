@@ -1,4 +1,5 @@
-export function calculateWidth(windowWidth: number): number {
+// width를 계산하는 함수
+function calculateWidth(windowWidth) {
     const baseWidth = 200; // 1920px 환경에서의 기본값
     const referenceWidth = 1920; // 기준이 되는 화면 너비 (1920px)
 
@@ -6,13 +7,13 @@ export function calculateWidth(windowWidth: number): number {
     const scaleFactor = 0.5;
 
     // 현재 windowWidth와 기준값인 referenceWidth의 비율로 width 계산
-    // 비율을 조정해 줄어드는 속도를 완화함
     const width = (windowWidth / referenceWidth) ** scaleFactor * baseWidth;
 
     return Math.max(width, 30); // 최소 30px을 설정
 }
 
-export function calculateHeight(documentHeight: number): number {
+// height를 계산하는 함수
+function calculateHeight(documentHeight) {
     const baseHeight = 50; // 기본 높이값, 전체 문서 높이의 비율로 계산
     const referenceHeight = document.body.scrollHeight; // document의 전체 높이를 기준으로 설정
 
@@ -25,14 +26,16 @@ export function calculateHeight(documentHeight: number): number {
     return Math.max(height, 20); // 최소 20px을 설정
 }
 
-function updateElementDimensions(width: number, height: number) {
-    const elements = document.querySelectorAll<HTMLDivElement>('#elementWrap'); // id가 elementWrap인 모든 요소 선택
+// id를 통해 요소 선택 및 width, height 업데이트
+function updateElementDimensions(width, height) {
+    const elements = document.querySelectorAll('#elementWrap'); // id가 elementWrap인 모든 요소 선택
     elements.forEach((element) => {
         element.style.width = `${width}px`;
         element.style.height = `${height}px`;
     });
 }
 
+// resize 이벤트 리스너를 즉시 실행하는 함수
 (function initializeResizeListener() {
     const handleResize = () => {
         const windowWidth = window.innerWidth;

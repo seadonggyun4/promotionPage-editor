@@ -1,8 +1,9 @@
 import JSZip from 'jszip'; // 라이브러리 import
 import { saveAs } from 'file-saver';
 
+
 export const useWebViewDownload = (uploadedImage: string | ArrayBuffer | null, backgroundImage: string) => {
-    const webViewDownload = (): void => {
+    const webViewDownload = async (): Promise<void>  => {
         const zip = new JSZip();
         const webview = document.querySelector('#rendingPage') as HTMLElement;
 
@@ -43,10 +44,20 @@ export const useWebViewDownload = (uploadedImage: string | ArrayBuffer | null, b
               </head>
               <body>
                 ${newInnerHTML}
+                <script src="./resizeHandler.js" />
+                <script>
+                    initializeResizeListener()
+                </script>
               </body>
             </html>`;
 
             zip.file('webview.html', htmlTemplate);
+
+            // Fetch the resizeHandler.js contents
+            const resizeHandlerResponse = await fetch(`${process.env.PUBLIC_URL}/resizeHandler.js`);
+            const resizeHandlerCode = await resizeHandlerResponse.text();
+
+            zip.file('resizeHandler.js', resizeHandlerCode);
 
             const imageSrc = uploadedImage ? uploadedImage.toString() : backgroundImage;
             fetch(imageSrc)
