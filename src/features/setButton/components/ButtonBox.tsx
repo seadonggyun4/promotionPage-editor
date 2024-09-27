@@ -1,6 +1,8 @@
-// ButtonBox.tsx
 import React from "react";
 import styled from "styled-components";
+
+import ButtonSetModal from "./ButtonSetModal";
+
 import { useElementsContext } from "../../..//app/provider/ElementsProvider";
 
 function ButtonBox() {
@@ -8,7 +10,7 @@ function ButtonBox() {
 
     const selectBtn = (buttonType : 'SampleBtn' | 'GradationBtn') => {
         const buttonComponents = {
-            SampleBtn: <SampleBtn>샘플 버튼</SampleBtn>,
+            SampleBtn: <SampleBtn>심플 버튼</SampleBtn>,
             GradationBtn: <GradationBtn>그라데이션 버튼</GradationBtn>,
         };
 
@@ -18,8 +20,11 @@ function ButtonBox() {
     return (
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
-            <SampleBtn onClick={() => selectBtn('SampleBtn')}>샘플 버튼</SampleBtn>
+            <SampleBtn onClick={() => selectBtn('SampleBtn')}>심플 버튼</SampleBtn>
             <GradationBtn onClick={() => selectBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
+            <ButtonSetModal>
+                <SampleBtn>심플 버튼</SampleBtn>
+            </ButtonSetModal>
         </ButtonBoxStyle>
     );
 }
@@ -38,7 +43,7 @@ const Title = styled.h2`
     font-weight: bold;
 `
 
-const SampleBtn = styled.button`
+const SampleBtn = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,7 +61,7 @@ const SampleBtn = styled.button`
     }
 `;
 
-const GradationBtn = styled.button`
+const GradationBtn = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
