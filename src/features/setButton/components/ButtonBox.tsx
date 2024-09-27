@@ -1,30 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-
 import ButtonSetModal from "./ButtonSetModal";
 
-import { useElementsContext } from "../../..//app/provider/ElementsProvider";
 
 function ButtonBox() {
-    const { createSampleButton } = useElementsContext()
+    const [selectedBtn, setSelectedBtn] = useState<'SampleBtn' | 'GradationBtn' | null>(null);
 
-    const selectBtn = (buttonType : 'SampleBtn' | 'GradationBtn') => {
-        const buttonComponents = {
-            SampleBtn: <SampleBtn>심플 버튼</SampleBtn>,
-            GradationBtn: <GradationBtn>그라데이션 버튼</GradationBtn>,
-        };
-
-        createSampleButton(buttonComponents[buttonType])
+    const buttonComponents = {
+        SampleBtn: <SampleBtn target="_blank">심플 버튼</SampleBtn>,
+        GradationBtn: <GradationBtn target="_blank">그라데이션 버튼</GradationBtn>,
     };
 
     return (
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
-            <SampleBtn onClick={() => selectBtn('SampleBtn')}>심플 버튼</SampleBtn>
-            <GradationBtn onClick={() => selectBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
-            <ButtonSetModal>
-                <SampleBtn>심플 버튼</SampleBtn>
-            </ButtonSetModal>
+            <SampleBtn onClick={() => setSelectedBtn('SampleBtn')}>심플 버튼</SampleBtn>
+            <GradationBtn onClick={() => setSelectedBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
+            {
+                selectedBtn &&
+                <ButtonSetModal closeModal={() => setSelectedBtn(null)}>
+                    {buttonComponents[selectedBtn]}
+                </ButtonSetModal>
+            }
         </ButtonBoxStyle>
     );
 }
@@ -57,7 +54,7 @@ const SampleBtn = styled.a`
     transition: 0.3s ease-in-out;
 
     &:hover {
-        opacity: 0.8;
+        opacity: 0.9;
     }
 `;
 
