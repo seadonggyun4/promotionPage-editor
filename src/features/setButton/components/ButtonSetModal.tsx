@@ -30,21 +30,13 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
         },
     });
 
-    const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setButtonText(event.target.value);
-    }
-
-    const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setButtonLink(event.target.value)
-    }
-
-    const handleTextColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTextColor(event.target.value);
-    }
-
-    const handleBackgroundColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setBackgroundColor(event.target.value);
-    }
+    const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        setter(event.target.value);
+    };
+    const handleTextChange = handleInputChange(setButtonText);
+    const handleLinkChange = handleInputChange(setButtonLink);
+    const handleTextColorChange = handleInputChange(setTextColor);
+    const handleBackgroundColorChange = handleInputChange(setBackgroundColor);
 
     const menuClick = (item: string) => setMenuActive(item)
 
