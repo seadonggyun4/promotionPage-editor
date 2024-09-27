@@ -95,7 +95,7 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                         <SettingForm>
                             <StyledLabel>텍스트 색상</StyledLabel>
                             <div style={{position: 'relative', marginBottom: '1.5rem'}}>
-                                <StyledColorLabel htmlFor="textColorInput" style={{backgroundColor: textColor}}/>
+                                <StyledColorLabel htmlFor="textColorInput" style={{backgroundColor: textColor}}>클릭후 색상을 선택해주세요.</StyledColorLabel>
                                 <input
                                     id="textColorInput"
                                     type="color"
@@ -105,7 +105,7 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                             </div>
                             <StyledLabel>버튼 색상</StyledLabel>
                             <div style={{position: 'relative', marginBottom: '1.5rem'}}>
-                                <StyledColorLabel htmlFor="backgroundColorInput" style={{backgroundColor}}/>
+                                <StyledColorLabel htmlFor="backgroundColorInput" style={{backgroundColor}}>클릭후 색상을 선택해주세요.</StyledColorLabel>
                                 <input
                                     id="backgroundColorInput"
                                     type="color"
@@ -136,7 +136,7 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                             />
                             <StyledLabel>테두리 색상</StyledLabel>
                             <div style={{position: 'relative'}}>
-                                <StyledColorLabel htmlFor="borderColorInput" style={{backgroundColor: borderColor}}/>
+                                <StyledColorLabel htmlFor="borderColorInput" style={{backgroundColor: borderColor}}>클릭후 색상을 선택해주세요.</StyledColorLabel>
                                 <input
                                     id="borderColorInput"
                                     type="color"
@@ -157,7 +157,7 @@ function ButtonSetModal ({closeModal, children}: ButtonSetModalProps) {
                             <input type="range" min="0" max="20" value={shadowBlurRadius} onChange={handleShadowBlurRadiusChange}/>
                             <StyledLabel>그림자 색상</StyledLabel>
                             <div style={{position: 'relative'}}>
-                                <StyledColorLabel htmlFor="shadowColorInput" style={{backgroundColor: shadowColor}}/>
+                                <StyledColorLabel htmlFor="shadowColorInput" style={{backgroundColor: shadowColor}}>클릭후 색상을 선택해주세요.</StyledColorLabel>
                                 <input
                                     id="shadowColorInput"
                                     type="color"
@@ -268,16 +268,19 @@ const StyledInput = styled.input`
 // colorSetting
 const StyledColorLabel = styled.label`
     position: absolute;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 2em;
-    border: 2px solid var(--c-border-primary);
+    color: #ffffff;
+    background-color: var(--c-border-primary);
     border-radius: 5px; 
     cursor: pointer;
     transition: 0.3s ease-in-out;
     
     &:hover {
-        border: 2px solid var(--c-accent-primary);
+        background-color: var(--c-accent-primary);
     }
 `;
 // btnWrap
