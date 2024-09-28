@@ -1,41 +1,60 @@
-import styled from "styled-components";
-import React from "react";
+import styled, {css} from "styled-components";
+import React, {useState} from "react";
 import {useUploadImageContext} from "../provider/UploadImageProvider";
+
+type UploadAreaStyleProps = {
+    isDraggedOver: boolean;
+};
 
 function UploadArea(){
     const { handleDrop, handleDragOver } = useUploadImageContext();
+    const [isDraggedOver, setIsDraggedOver] = useState(false);
+
+    const onDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setIsDraggedOver(true);
+        handleDragOver(event);
+    }
 
     return (
         <UploadAreaStyle
-            onDragOver={handleDragOver}
+            isDraggedOver={isDraggedOver}
+            onDragOver={onDragOver}
             onDrop={handleDrop}
+            onDragLeave={() => {setIsDraggedOver(false)}}
         >
-            <strong>
-                이미지 파일을 드래그 해주세요.
-            </strong>
+            <p>
+                이미지 파일을 <br/>
+                드래그 해주세요.
+            </p>
         </UploadAreaStyle>
     )
 }
 
-const UploadAreaStyle = styled.div`
+const UploadAreaStyle = styled.div<UploadAreaStyleProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding: 3rem;
+    padding: 1rem;
     width: 200px;
     height: 150px;
-    border: none;
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23ccc' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border: 3px dashed #e5e5e5;
     background-color: transparent;
     cursor: pointer;
+    transition: .3s ease-in-out;
+    text-align: center;
 
-    &:hover, &:focus{
-        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%232e44ff' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    ${props => props.isDraggedOver && css`
+        border: 3px dashed var(--c-accent-primary);
+    `}
+
+    &:hover, &:focus, &:active{
+        border: 3px dashed var(--c-accent-primary);
     }
 
-    & strong {
+    & p {
         font-weight: 700;
         color: var(--c-accent-primary);
     }
