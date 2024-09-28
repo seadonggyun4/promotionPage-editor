@@ -6,6 +6,7 @@ interface UploadImageContextType {
     uploadedImage: string | ArrayBuffer | null;
     handleDrop: (e: React.DragEvent<HTMLDivElement>) => void;
     handleDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+    handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 // Context 생성

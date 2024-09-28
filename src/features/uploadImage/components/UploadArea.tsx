@@ -7,7 +7,7 @@ type UploadAreaStyleProps = {
 };
 
 function UploadArea(){
-    const { handleDrop, handleDragOver } = useUploadImageContext();
+    const { handleDrop, handleDragOver, handleFileSelect } = useUploadImageContext();
     const [isDraggedOver, setIsDraggedOver] = useState(false);
 
     const onDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -23,17 +23,21 @@ function UploadArea(){
     }
 
     return (
-        <UploadAreaStyle
-            $isDraggedOver={isDraggedOver}
-            onDragOver={onDragOver}
-            onDrop={onDragDrop}
-            onDragLeave={() => {setIsDraggedOver(false)}}
-        >
-            <p>
-                이미지 파일을 <br/>
-                드래그 해주세요.
-            </p>
-        </UploadAreaStyle>
+        <>
+            <UploadAreaStyle
+                $isDraggedOver={isDraggedOver}
+                onDragOver={onDragOver}
+                onDrop={onDragDrop}
+                onDragLeave={() => {setIsDraggedOver(false)}}
+            >
+                <p>
+                    이미지 파일을 <br/>
+                    드래그 해주세요.
+                </p>
+            </UploadAreaStyle>
+            <input id="promotionPage-upload" type="file" style={{display:"none"}} onChange={handleFileSelect}/>
+            <UploadBtn htmlFor="promotionPage-upload">이미지 업로드</UploadBtn>
+        </>
     )
 }
 
@@ -42,7 +46,7 @@ const UploadAreaStyle = styled.div<UploadAreaStyleProps>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     padding: 1rem;
     width: 200px;
     height: 150px;
@@ -56,15 +60,29 @@ const UploadAreaStyle = styled.div<UploadAreaStyleProps>`
         border: 3px dashed var(--c-accent-primary);
     `}
 
-    &:hover, &:focus, &:active{
-        border: 3px dashed var(--c-accent-primary);
-    }
-
     & p {
         font-weight: 700;
         color: var(--c-accent-primary);
     }
 `;
+
+const UploadBtn = styled.label`
+    display: block;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background: var(--c-accent-primary);
+    color: #ffffff;
+    box-shadow: 0 0 10px var(--c-accent-primary);
+    text-align: center;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    
+    &:hover {
+        opacity: 0.9;
+    }
+`
 
 
 export default UploadArea;

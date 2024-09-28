@@ -6,7 +6,19 @@ export const useUploadImage = () => {
     const handleDrop = (e: DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
         const files = e.dataTransfer.files;
+        checkFiles(files)
+    };
 
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        checkFiles(files)
+    };
+
+    const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    };
+
+    const checkFiles = (files: FileList | null) => {
         if (files && files[0]) {
             const reader = new FileReader();
             reader.readAsDataURL(files[0]);
@@ -14,11 +26,7 @@ export const useUploadImage = () => {
                 setUploadedImage(reader.result); // 이미지 업데이트
             };
         }
-    };
+    }
 
-    const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-    };
-
-    return { uploadedImage, handleDrop, handleDragOver };
+    return { uploadedImage, handleDrop, handleDragOver, handleFileSelect };
 };
