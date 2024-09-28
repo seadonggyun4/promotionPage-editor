@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {useUploadImageContext} from "../provider/UploadImageProvider";
 
 type UploadAreaStyleProps = {
-    isDraggedOver: boolean;
+    $isDraggedOver: boolean;
 };
 
 function UploadArea(){
@@ -16,11 +16,17 @@ function UploadArea(){
         handleDragOver(event);
     }
 
+    const onDragDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setIsDraggedOver(false)
+        handleDrop(event)
+    }
+
     return (
         <UploadAreaStyle
-            isDraggedOver={isDraggedOver}
+            $isDraggedOver={isDraggedOver}
             onDragOver={onDragOver}
-            onDrop={handleDrop}
+            onDrop={onDragDrop}
             onDragLeave={() => {setIsDraggedOver(false)}}
         >
             <p>
@@ -46,7 +52,7 @@ const UploadAreaStyle = styled.div<UploadAreaStyleProps>`
     transition: .3s ease-in-out;
     text-align: center;
 
-    ${props => props.isDraggedOver && css`
+    ${props => props.$isDraggedOver && css`
         border: 3px dashed var(--c-accent-primary);
     `}
 
