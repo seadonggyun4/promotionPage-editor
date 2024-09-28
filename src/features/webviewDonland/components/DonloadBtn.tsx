@@ -8,7 +8,7 @@ interface DonloadBtnProps {
 }
 
 interface DownloadBtnStyleProps {
-    clicked: boolean;
+    $clicked: boolean;
 }
 
 function DonloadBtn({uploadedImage}: DonloadBtnProps) {
@@ -23,7 +23,7 @@ function DonloadBtn({uploadedImage}: DonloadBtnProps) {
     return (
         <DownloadBtnStyle
             onClick={handleBtnClick}
-            clicked={clicked}
+            $clicked={clicked}
             type="button"
             aria-label="프로모션 페이지 다운로드 버튼"
         >
@@ -58,7 +58,7 @@ const DownloadBtnStyle = styled.button<DownloadBtnStyleProps>`
     & .wrapper {
         position: relative;
         display: grid;
-        transform: ${({clicked}) => (clicked 
+        transform: ${({$clicked}) => ($clicked 
                 ? 'translateZ(calc(1rem * -1)) scale(1.001) rotateX(0) rotateY(0) rotateZ(0)' 
                 : 'translateZ(0) scale(1.001) rotateX(1.5turn) rotateY(0) rotateZ(0)')};
         transform-style: preserve-3d;
@@ -121,13 +121,13 @@ const DownloadBtnStyle = styled.button<DownloadBtnStyleProps>`
     & .front,
     & .back {
         padding: 1rem 2rem;
-        background-color: ${(props) => (props.clicked 
+        background-color: ${({$clicked}) => ($clicked 
                 ? 'var(--c-accent-success)' 
                 : 'var(--c-accent-primary)')};
     }
 
     & .wrapper :not(.front):not(.back) {
-        background-color: ${(props) => (props.clicked 
+        background-color: ${({$clicked}) => ($clicked 
                 ? 'var(--c-accent-success-secondary)' 
                 : 'var(--c-text-action)')};
     }
