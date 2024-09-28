@@ -60,6 +60,17 @@ const ModalWrapper = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: show 0.3s ease-in-out forwards;
+    
+    @keyframes show {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
 `;
 const ModalInner = styled.div`
     display: flex;
@@ -70,6 +81,17 @@ const ModalInner = styled.div`
     background-color: var(--c-background-secondary);
     border-radius: 15px;
     padding: 20px;
+    animation: popUp 0.3s ease-in-out forwards;
+
+    @keyframes popUp {
+        0%{
+            transform: scale(0.9);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+    
 `;
 const ElementWrapper = styled.div`
     height: 100%;
