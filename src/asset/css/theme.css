@@ -4,6 +4,8 @@
     --c-text-action: #404089;
     --c-accent-primary: #434ce8;
     --c-accent-warning: #e31765;
+    --c-accent-success: hsl(147, 50%, 47%);
+    --c-accent-success-secondary: hsl(147, 50%, 37%);
     --c-border-primary: #eff1f6;
     --c-background-primary: #ffffff;
     --c-background-secondary: #fdfcff;
