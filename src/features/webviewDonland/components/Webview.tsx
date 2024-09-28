@@ -83,6 +83,7 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
 const WebViewStyle = styled.section`
     position: relative;
     width: 100%;
+    max-width: 980px;
     height: auto;
     background: #ffff;
 `;

@@ -20,11 +20,11 @@ function ContentPanel({menuActive} :ContentPanelProps) {
 const ContentPanelStyle = styled.aside`
     display: none;
     width: 25%;
-    max-width: 280px;
+    max-width: 250px;
     padding: 2rem 1rem;
     background-color: var(--c-background-tertiary);
 
-    @media (min-width: 800px) {
+    @media (min-width: 1000px) {
         display: block;
     }
 `;

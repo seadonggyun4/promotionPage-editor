@@ -14,8 +14,12 @@ function ButtonBox() {
     return (
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
-            <SimpleBtn onClick={() => setSelectedBtn('SampleBtn')}>심플 버튼</SimpleBtn>
-            <GradationBtn onClick={() => setSelectedBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
+            <div style={{height: '50px', width: '100%'}}>
+                <SimpleBtn onClick={() => setSelectedBtn('SampleBtn')}>심플 버튼</SimpleBtn>
+            </div>
+            <div style={{height: '50px', width: '100%'}}>
+                <GradationBtn onClick={() => setSelectedBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
+            </div>
             {
                 selectedBtn &&
                 <ButtonSetModal selectedBtn={selectedBtn} closeModal={() => setSelectedBtn(null)}>
