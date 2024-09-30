@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { menu } from "../../contents/contents";
+import { MENU } from "../../constant/global";
 
 export const useMenu = () => {
-    const [isActive, setIsActive] = useState(menu[0]);
+    const [isActive, setIsActive] = useState(MENU[0]);
 
     const activeMenu = (data: string): void => {
         setIsActive(data);

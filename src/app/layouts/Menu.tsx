@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { menu } from "../../contents/contents";
+import { MENU } from "../../constant/global";
 
 interface MenuProps {
     menuActive : string,
@@ -12,7 +12,7 @@ function Menu({ menuActive, menuClick, children = null }: MenuProps) {
     return (
         <MenuStyle>
             <ul>
-                {menu && menu.map((item, index) => (
+                {MENU && MENU.map((item, index) => (
                     <li key={index} className={item === menuActive ? "active" : ""} onClick={() => {menuClick(item)}}>
                         {item}
                     </li>

@@ -73,9 +73,17 @@ function SimpleBtnForm({simpleBtnHook}: { simpleBtnHook: SimpleBtnHook }) {
                 menuActive === menu[0] &&
                 <SettingForm>
                     <StyledLabel>버튼 텍스트</StyledLabel>
-                    <StyledInput type="text" placeholder="텍스트를 입력해 주세요." onChange={handleTextChange}/>
+                    <StyledInput
+                        type="text"
+                        placeholder="텍스트를 입력해 주세요."
+                        value={buttonText}
+                        onChange={handleTextChange}/>
                     <StyledLabel>버튼 링크</StyledLabel>
-                    <StyledInput type="url" placeholder="링크를 입력해 주세요." onChange={handleLinkChange}/>
+                    <StyledInput
+                        type="url"
+                        placeholder="링크를 입력해 주세요."
+                        value={buttonLink}
+                        onChange={handleLinkChange}/>
                 </SettingForm>
             }
             {
@@ -88,6 +96,7 @@ function SimpleBtnForm({simpleBtnHook}: { simpleBtnHook: SimpleBtnHook }) {
                             id="textColorInput"
                             type="color"
                             style={{visibility: 'hidden'}}
+                            value={textColor}
                             onChange={handleTextColorChange}
                         />
                     </div>
@@ -98,6 +107,7 @@ function SimpleBtnForm({simpleBtnHook}: { simpleBtnHook: SimpleBtnHook }) {
                             id="backgroundColorInput"
                             type="color"
                             style={{visibility: 'hidden'}}
+                            value={backgroundColor}
                             onChange={handleBackgroundColorChange}
                         />
                     </div>
@@ -138,11 +148,26 @@ function SimpleBtnForm({simpleBtnHook}: { simpleBtnHook: SimpleBtnHook }) {
                 menuActive === menu[3] &&
                 <SettingForm>
                     <StyledLabel>그림자 X축</StyledLabel>
-                    <input type="range" min="0" max="20" value={shadowOffsetX} onChange={handleShadowOffsetXChange}/>
+                    <input
+                        type="range"
+                        min="0"
+                        max="20"
+                        value={shadowOffsetX}
+                        onChange={handleShadowOffsetXChange}/>
                     <StyledLabel>그림자 Y축</StyledLabel>
-                    <input type="range" min="0" max="20" value={shadowOffsetY} onChange={handleShadowOffsetYChange}/>
+                    <input
+                        type="range"
+                        min="0"
+                        max="20"
+                        value={shadowOffsetY}
+                        onChange={handleShadowOffsetYChange}/>
                     <StyledLabel>그림자 Z축</StyledLabel>
-                    <input type="range" min="0" max="20" value={shadowBlurRadius} onChange={handleShadowBlurRadiusChange}/>
+                    <input
+                        type="range"
+                        min="0"
+                        max="20"
+                        value={shadowBlurRadius}
+                        onChange={handleShadowBlurRadiusChange}/>
                     <StyledLabel>그림자 색상</StyledLabel>
                     <div style={{position: 'relative'}}>
                         <StyledColorLabel htmlFor="shadowColorInput" style={{backgroundColor: shadowColor}}>클릭후 색상을 선택해주세요.</StyledColorLabel>

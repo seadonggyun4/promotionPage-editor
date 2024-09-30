@@ -1,13 +1,26 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import ButtonSetModal from "./ButtonSetModal";
+import { SIMPLE_BTN } from "../../../constant/button";
 
+type SimpleBtnProps = {
+    backgroundColor: string;
+    textColor: string;
+    borderRadius: string;
+}
 
 function ButtonBox() {
     const [selectedBtn, setSelectedBtn] = useState<'SampleBtn' | 'GradationBtn' | null>(null);
 
     const buttonComponents = {
-        SampleBtn: <SimpleBtn target="_blank">심플 버튼</SimpleBtn>,
+        SampleBtn:
+            <SimpleBtn
+                backgroundColor={SIMPLE_BTN['backgroundColor']}
+                textColor={SIMPLE_BTN['textColor']}
+                borderRadius={SIMPLE_BTN['borderRadius']}
+                target="_blank">
+                {SIMPLE_BTN['text']}
+            </SimpleBtn>,
         GradationBtn: <GradationBtn target="_blank">그라데이션 버튼</GradationBtn>,
     };
 
@@ -15,7 +28,13 @@ function ButtonBox() {
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
             <div style={{height: '50px', width: '100%'}}>
-                <SimpleBtn onClick={() => setSelectedBtn('SampleBtn')}>심플 버튼</SimpleBtn>
+                <SimpleBtn
+                    backgroundColor={SIMPLE_BTN['backgroundColor']}
+                    textColor={SIMPLE_BTN['textColor']}
+                    borderRadius={SIMPLE_BTN['borderRadius']}
+                    onClick={() => setSelectedBtn('SampleBtn')}>
+                    {SIMPLE_BTN['text']}
+                </SimpleBtn>
             </div>
             <div style={{height: '50px', width: '100%'}}>
                 <GradationBtn onClick={() => setSelectedBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
@@ -44,16 +63,16 @@ const Title = styled.h2`
     font-weight: bold;
 `
 // SimpleBtn
-const SimpleBtn = styled.a`
+const SimpleBtn = styled.a<SimpleBtnProps>`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1.5rem 0;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
-    background-color: var(--c-accent-primary);
-    color: #ffffff;
+    border-radius: ${({borderRadius}) => borderRadius}px;
+    background-color: ${({backgroundColor}) => backgroundColor};
+    color: ${({textColor}) => textColor};
     cursor: pointer;
     transition: 0.3s ease-in-out;
 

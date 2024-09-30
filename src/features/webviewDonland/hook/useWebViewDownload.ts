@@ -53,7 +53,7 @@ export const useWebViewDownload = (uploadedImage: string | ArrayBuffer | null, b
 
             zip.file('webview.html', htmlTemplate);
 
-            // Fetch the resizeHandler.js contents
+            // Fetch the resizeHandler.js constant
             const resizeHandlerResponse = await fetch(`${process.env.PUBLIC_URL}/resizeHandler.js`);
             const resizeHandlerCode = await resizeHandlerResponse.text();
 

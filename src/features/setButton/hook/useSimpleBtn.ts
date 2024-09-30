@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {SIMPLE_BTN} from '../../../constant/button'
 
 const menu = [
     '텍스트 & 링크',
@@ -9,17 +10,18 @@ const menu = [
 
 export function useSimpleBtn() {
     const [menuActive, setMenuActive] = useState(menu[0]);
-    const [buttonText, setButtonText] = useState('');
-    const [buttonLink, setButtonLink] = useState('');
-    const [textColor, setTextColor] = useState('');
-    const [backgroundColor, setBackgroundColor] = useState('');
-    const [borderRadius, setBorderRadius] = useState('0');
-    const [borderWidth, setBorderWidth] = useState('0');
-    const [borderColor, setBorderColor] = useState('');
-    const [shadowOffsetX, setShadowOffsetX] = useState('0');
-    const [shadowOffsetY, setShadowOffsetY] = useState('0');
-    const [shadowBlurRadius, setShadowBlurRadius] = useState('0');
-    const [shadowColor, setShadowColor] = useState('#000');
+
+    const [buttonText, setButtonText] = useState(SIMPLE_BTN['text']);
+    const [buttonLink, setButtonLink] = useState(SIMPLE_BTN['link']);
+    const [textColor, setTextColor] = useState(SIMPLE_BTN['textColor']);
+    const [backgroundColor, setBackgroundColor] = useState(SIMPLE_BTN['backgroundColor']);
+    const [borderRadius, setBorderRadius] = useState(SIMPLE_BTN['borderRadius']);
+    const [borderWidth, setBorderWidth] = useState(SIMPLE_BTN['borderWidth']);
+    const [borderColor, setBorderColor] = useState(SIMPLE_BTN['borderColor']);
+    const [shadowOffsetX, setShadowOffsetX] = useState(SIMPLE_BTN['shadowOffsetX']);
+    const [shadowOffsetY, setShadowOffsetY] = useState(SIMPLE_BTN['shadowOffsetY']);
+    const [shadowBlurRadius, setShadowBlurRadius] = useState(SIMPLE_BTN['shadowBlurRadius']);
+    const [shadowColor, setShadowColor] = useState(SIMPLE_BTN['shadowColor']);
 
     const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setter(event.target.value);

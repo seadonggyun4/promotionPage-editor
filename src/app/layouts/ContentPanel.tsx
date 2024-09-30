@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import UploadArea from '../../features/uploadImage/components/UploadArea'
 import ButtonBox from "../../features/setButton/components/ButtonBox";
-import {menu} from "../../contents/contents";
+import {MENU} from "../../constant/global";
 
 interface ContentPanelProps {
     menuActive : string,
@@ -11,8 +11,8 @@ interface ContentPanelProps {
 function ContentPanel({menuActive} :ContentPanelProps) {
     return(
         <ContentPanelStyle>
-            { menu[0] ===  menuActive ? <UploadArea /> : '' }
-            { menu[1] ===  menuActive ? <ButtonBox /> : '' }
+            { MENU[0] ===  menuActive ? <UploadArea /> : '' }
+            { MENU[1] ===  menuActive ? <ButtonBox /> : '' }
         </ContentPanelStyle>
     )
 }
