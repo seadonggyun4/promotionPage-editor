@@ -90,13 +90,27 @@ const GradationBtn = styled.a`
     width: 100%;
     height: 100%;
     border-radius: 20px;
-    background: linear-gradient(90deg, rgba(64,64,137,1) 35%, rgba(67,76,232,1) 100%);
+    background: linear-gradient(90deg, #03a9f4, var(--c-accent-primary), var(--c-text-action), #03a9f4);
+    background-size: 400%;
     color: #ffffff;
     cursor: pointer;
     transition: 0.3s ease-in-out;
 
     &:hover {
-        opacity: 0.8;
+        animation-name: gradient;
+        animation-duration: 8s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    /* gradient animation */
+    @keyframes gradient {
+        0% {
+            background-position: 0%;
+        }
+        100% {
+            background-position: 400%;
+        }
     }
 `
 
