@@ -1,10 +1,19 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import ButtonSetModal from "./ButtonSetModal";
-import { SIMPLE_BTN } from "../../../constant/button";
+import { SIMPLE_BTN, GRADATION_BTN } from "../../../constant/button";
 
 type SimpleBtnProps = {
     backgroundColor: string;
+    textColor: string;
+    borderRadius: string;
+}
+
+type GrationBtnProps = {
+    gradationColor1: string;
+    gradationColor2: string;
+    gradationColor3: string;
+    gradationColor4: string;
     textColor: string;
     borderRadius: string;
 }
@@ -21,7 +30,17 @@ function ButtonBox() {
                 target="_blank">
                 {SIMPLE_BTN['text']}
             </SimpleBtn>,
-        GradationBtn: <GradationBtn target="_blank">그라데이션 버튼</GradationBtn>,
+        GradationBtn:
+            <GradationBtn
+                textColor={GRADATION_BTN['textColor']}
+                gradationColor1={GRADATION_BTN['gradationColor1']}
+                gradationColor2={GRADATION_BTN['gradationColor2']}
+                gradationColor3={GRADATION_BTN['gradationColor3']}
+                gradationColor4={GRADATION_BTN['gradationColor4']}
+                borderRadius={GRADATION_BTN['borderRadius']}
+                target="_blank">
+                {GRADATION_BTN['text']}
+            </GradationBtn>,
     };
 
     return (
@@ -37,7 +56,16 @@ function ButtonBox() {
                 </SimpleBtn>
             </div>
             <div style={{height: '50px', width: '100%'}}>
-                <GradationBtn onClick={() => setSelectedBtn('GradationBtn')}>그라데이션 버튼</GradationBtn>
+                <GradationBtn
+                    textColor={GRADATION_BTN['textColor']}
+                    gradationColor1={GRADATION_BTN['gradationColor1']}
+                    gradationColor2={GRADATION_BTN['gradationColor2']}
+                    gradationColor3={GRADATION_BTN['gradationColor3']}
+                    gradationColor4={GRADATION_BTN['gradationColor4']}
+                    borderRadius={GRADATION_BTN['borderRadius']}
+                    onClick={() => setSelectedBtn('GradationBtn')}>
+                    {GRADATION_BTN['text']}
+                </GradationBtn>
             </div>
             {
                 selectedBtn &&
@@ -62,6 +90,7 @@ const Title = styled.h2`
     font-size: 1rem;
     font-weight: bold;
 `
+
 // SimpleBtn
 const SimpleBtn = styled.a<SimpleBtnProps>`
     display: flex;
@@ -82,17 +111,18 @@ const SimpleBtn = styled.a<SimpleBtnProps>`
 `;
 
 // GradationBtn
-const GradationBtn = styled.a`
+const GradationBtn = styled.a<GrationBtnProps>`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1.5rem 0;
     width: 100%;
     height: 100%;
-    border-radius: 20px;
-    background: linear-gradient(90deg, #03a9f4, var(--c-accent-primary), var(--c-text-action), #03a9f4);
+    border-radius: ${({borderRadius}) => borderRadius}px;
+    background: ${({gradationColor1, gradationColor2, gradationColor3, gradationColor4}) =>
+            `linear-gradient(90deg, ${gradationColor1}, ${gradationColor2}, ${gradationColor3}, ${gradationColor4})`};
     background-size: 400%;
-    color: #ffffff;
+    color: ${({textColor}) => textColor};
     cursor: pointer;
     transition: 0.3s ease-in-out;
 

@@ -11,3 +11,20 @@ export const SIMPLE_BTN  = {
     shadowBlurRadius: '0',
     shadowColor:'',
 }
+
+export const GRADATION_BTN = {
+    text: '그라데이션 버튼',
+    link: '',
+    textColor: '#ffffff',
+    gradationColor1: '#03a9f4',
+    gradationColor2: '#434ce8',
+    gradationColor3: '#404089',
+    gradationColor4: '#03a9f4',
+    borderRadius: '20',
+    borderWidth: '0',
+    borderColor: '',
+    shadowOffsetX: '0',
+    shadowOffsetY: '0',
+    shadowBlurRadius: '0',
+    shadowColor:'',
+}
