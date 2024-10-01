@@ -54,6 +54,7 @@ export function useGradtionBtn() {
                 borderRadius: `${borderRadius}px`,
                 border: `${borderWidth}px solid ${borderColor}`,
                 background: `linear-gradient(90deg, ${gradationColor1}, ${gradationColor2}, ${gradationColor3}, ${gradationColor4})`,
+                backgroundSize: "400%",
                 boxShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlurRadius}px ${shadowColor}`,
             },
         }

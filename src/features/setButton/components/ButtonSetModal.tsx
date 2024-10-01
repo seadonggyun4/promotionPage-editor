@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+
+// components
 import SimpleBtnForm from "./SimpleBtnForm";
+import GradationBtnForm from "./GradationBtnForm";
+
+// hook & Provider
 import { useElementsContext } from "../../..//app/provider/ElementsProvider";
 import { useSimpleBtn } from "../hook/useSimpleBtn";
+import { useGradtionBtn } from "../hook/useGradtionBtn";
 
 interface ButtonSetModalProps {
     selectedBtn: string;
@@ -13,10 +19,14 @@ interface ButtonSetModalProps {
 function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProps) {
     const { createSampleButton } = useElementsContext()
     const simpleBtnHook = useSimpleBtn();
+    const gradationBtnHook = useGradtionBtn()
 
     const checkSelectedBtn = (selectedBtn : string) => {
         if (selectedBtn === 'SampleBtn') {
             return React.cloneElement(children, simpleBtnHook.customButton(children));
+        }
+        if (selectedBtn === 'GradationBtn') {
+            return React.cloneElement(children, gradationBtnHook.customButton(children));
         }
         return children;
     }
@@ -38,6 +48,7 @@ function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProp
                 </ElementWrapper>
                 <ElementSettingBox>
                     { selectedBtn === 'SampleBtn' && <SimpleBtnForm simpleBtnHook={simpleBtnHook}/> }
+                    { selectedBtn === 'GradationBtn' && <GradationBtnForm gradationBtnHook={gradationBtnHook}/> }
                     <BtnWrapper>
                     <button className="activeBtn" onClick={addButton}>등록</button>
                         <button className="cancelBtn" onClick={closeModal}>취소</button>

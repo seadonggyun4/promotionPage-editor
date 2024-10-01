@@ -4,18 +4,18 @@ import ButtonSetModal from "./ButtonSetModal";
 import { SIMPLE_BTN, GRADATION_BTN } from "../../../constant/button";
 
 type SimpleBtnProps = {
-    backgroundColor: string;
-    textColor: string;
-    borderRadius: string;
+    $backgroundColor: string;
+    $textColor: string;
+    $borderRadius: string;
 }
 
 type GrationBtnProps = {
-    gradationColor1: string;
-    gradationColor2: string;
-    gradationColor3: string;
-    gradationColor4: string;
-    textColor: string;
-    borderRadius: string;
+    $gradationColor1: string;
+    $gradationColor2: string;
+    $gradationColor3: string;
+    $gradationColor4: string;
+    $textColor: string;
+    $borderRadius: string;
 }
 
 function ButtonBox() {
@@ -24,20 +24,20 @@ function ButtonBox() {
     const buttonComponents = {
         SampleBtn:
             <SimpleBtn
-                backgroundColor={SIMPLE_BTN['backgroundColor']}
-                textColor={SIMPLE_BTN['textColor']}
-                borderRadius={SIMPLE_BTN['borderRadius']}
+                $backgroundColor={SIMPLE_BTN['backgroundColor']}
+                $textColor={SIMPLE_BTN['textColor']}
+                $borderRadius={SIMPLE_BTN['borderRadius']}
                 target="_blank">
                 {SIMPLE_BTN['text']}
             </SimpleBtn>,
         GradationBtn:
             <GradationBtn
-                textColor={GRADATION_BTN['textColor']}
-                gradationColor1={GRADATION_BTN['gradationColor1']}
-                gradationColor2={GRADATION_BTN['gradationColor2']}
-                gradationColor3={GRADATION_BTN['gradationColor3']}
-                gradationColor4={GRADATION_BTN['gradationColor4']}
-                borderRadius={GRADATION_BTN['borderRadius']}
+                $textColor={GRADATION_BTN['textColor']}
+                $gradationColor1={GRADATION_BTN['gradationColor1']}
+                $gradationColor2={GRADATION_BTN['gradationColor2']}
+                $gradationColor3={GRADATION_BTN['gradationColor3']}
+                $gradationColor4={GRADATION_BTN['gradationColor4']}
+                $borderRadius={GRADATION_BTN['borderRadius']}
                 target="_blank">
                 {GRADATION_BTN['text']}
             </GradationBtn>,
@@ -48,21 +48,21 @@ function ButtonBox() {
             <Title>버튼 카테고리</Title>
             <div style={{height: '50px', width: '100%'}}>
                 <SimpleBtn
-                    backgroundColor={SIMPLE_BTN['backgroundColor']}
-                    textColor={SIMPLE_BTN['textColor']}
-                    borderRadius={SIMPLE_BTN['borderRadius']}
+                    $backgroundColor={SIMPLE_BTN['backgroundColor']}
+                    $textColor={SIMPLE_BTN['textColor']}
+                    $borderRadius={SIMPLE_BTN['borderRadius']}
                     onClick={() => setSelectedBtn('SampleBtn')}>
                     {SIMPLE_BTN['text']}
                 </SimpleBtn>
             </div>
             <div style={{height: '50px', width: '100%'}}>
                 <GradationBtn
-                    textColor={GRADATION_BTN['textColor']}
-                    gradationColor1={GRADATION_BTN['gradationColor1']}
-                    gradationColor2={GRADATION_BTN['gradationColor2']}
-                    gradationColor3={GRADATION_BTN['gradationColor3']}
-                    gradationColor4={GRADATION_BTN['gradationColor4']}
-                    borderRadius={GRADATION_BTN['borderRadius']}
+                    $textColor={GRADATION_BTN['textColor']}
+                    $gradationColor1={GRADATION_BTN['gradationColor1']}
+                    $gradationColor2={GRADATION_BTN['gradationColor2']}
+                    $gradationColor3={GRADATION_BTN['gradationColor3']}
+                    $gradationColor4={GRADATION_BTN['gradationColor4']}
+                    $borderRadius={GRADATION_BTN['borderRadius']}
                     onClick={() => setSelectedBtn('GradationBtn')}>
                     {GRADATION_BTN['text']}
                 </GradationBtn>
@@ -99,9 +99,9 @@ const SimpleBtn = styled.a<SimpleBtnProps>`
     padding: 1.5rem 0;
     width: 100%;
     height: 100%;
-    border-radius: ${({borderRadius}) => borderRadius}px;
-    background-color: ${({backgroundColor}) => backgroundColor};
-    color: ${({textColor}) => textColor};
+    border-radius: ${({$borderRadius}) => $borderRadius}px;
+    background-color: ${({$backgroundColor}) => $backgroundColor};
+    color: ${({$textColor}) => $textColor};
     cursor: pointer;
     transition: 0.3s ease-in-out;
 
@@ -118,11 +118,11 @@ const GradationBtn = styled.a<GrationBtnProps>`
     padding: 1.5rem 0;
     width: 100%;
     height: 100%;
-    border-radius: ${({borderRadius}) => borderRadius}px;
-    background: ${({gradationColor1, gradationColor2, gradationColor3, gradationColor4}) =>
-            `linear-gradient(90deg, ${gradationColor1}, ${gradationColor2}, ${gradationColor3}, ${gradationColor4})`};
+    border-radius: ${({$borderRadius}) => $borderRadius}px;
+    background: ${({$gradationColor1, $gradationColor2, $gradationColor3, $gradationColor4}) =>
+            `linear-gradient(90deg, ${$gradationColor1}, ${$gradationColor2}, ${$gradationColor3}, ${$gradationColor4})`};
     background-size: 400%;
-    color: ${({textColor}) => textColor};
+    color: ${({$textColor}) => $textColor};
     cursor: pointer;
     transition: 0.3s ease-in-out;
 
