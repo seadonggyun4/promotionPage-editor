@@ -34,7 +34,7 @@ function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProp
     const customButton = checkSelectedBtn(selectedBtn);
 
     const addButton = () => {
-        createSampleButton(customButton)
+        createSampleButton(customButton, selectedBtn)
         closeModal()
     }
 

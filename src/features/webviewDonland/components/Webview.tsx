@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import { ELEMENT_MENU } from '../../../constant/global'
 import backgroundImage from "../../../asset/img/promotionPage.jpeg";
+
 import { useElementsContext } from "../../../app/provider/ElementsProvider";
+import { useSetButtonContext } from "../../../features/setButton/provider/setButtonProvider";
+
+type SelectedButtonType = 'SampleBtn' | 'GradationBtn' | null;
+
 
 interface ElementData {
     id: string;
     type: string;
+    style: string;
     element: React.ReactNode;
     x: number;
     y: number;
@@ -19,13 +26,14 @@ interface WebviewProps {
 
 function Webview({ elementsData, uploadedImage }: WebviewProps) {
     const { updateElementPosition } = useElementsContext();
+    const { setSelectedBtn } = useSetButtonContext()
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-    const [menuActive, setMenuActive] = useState(false);
+    const [menuActive, setMenuActive] = useState('');
 
 
     // 드래그 시작 시 오프셋을 계산하여 저장
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: string, elementX: number, elementY: number) => {
-        setMenuActive(false)
+        setMenuActive('')
         const elementsBox = (e.target as HTMLElement).closest('#elementsBox');
         const boundingRect = elementsBox?.getBoundingClientRect();
 
@@ -61,8 +69,15 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
 
     const clickElement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, data: ElementData) => {
         e.preventDefault()
-        setMenuActive((prev) => !prev)
+        if(menuActive === '') setMenuActive(data.id)
+        else if(menuActive !== data.id)  setMenuActive(data.id)
+        else setMenuActive('')
     }
+
+    const elementMenuClick = (data: ElementData, menu: string) => {
+       setSelectedBtn(data.style as SelectedButtonType);
+    }
+
     return (
         <div id="rendingPage">
             <WebViewStyle>
@@ -83,12 +98,12 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
                         >
                             {data.element}
                             {
-                                menuActive &&
+                                menuActive === data.id &&
                                 <ElementMenu>
                                     {
                                         data.type &&
                                         ELEMENT_MENU[data.type as keyof typeof ELEMENT_MENU].map( (menu, index) => (
-                                            <li key={index}>{menu}</li>
+                                            <li key={index} onClick={() => elementMenuClick(data, menu)}>{menu}</li>
                                         ))
                                     }
                                 </ElementMenu>

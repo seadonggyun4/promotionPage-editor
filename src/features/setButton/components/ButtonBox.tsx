@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import ButtonSetModal from "./ButtonSetModal";
 import { SIMPLE_BTN, GRADATION_BTN } from "../../../constant/button";
+import { useSetButtonContext } from "../provider/setButtonProvider";
 
 type SimpleBtnProps = {
     $backgroundColor: string;
@@ -19,8 +20,6 @@ type GrationBtnProps = {
 }
 
 function ButtonBox() {
-    const [selectedBtn, setSelectedBtn] = useState<'SampleBtn' | 'GradationBtn' | null>(null);
-
     const buttonComponents = {
         SampleBtn:
             <SimpleBtn
@@ -44,6 +43,7 @@ function ButtonBox() {
                 {GRADATION_BTN['text']}
             </GradationBtn>,
     };
+    const {selectedBtn, setSelectedBtn} = useSetButtonContext()
 
     return (
         <ButtonBoxStyle>

@@ -5,6 +5,7 @@ import { useState } from "react";
 interface ElementData {
     id: string;
     type: string;
+    style: string;
     element: React.ReactNode;
     x: number;
     y: number;
@@ -14,10 +15,11 @@ export const useElements = () => {
     const [elementsData, setElementsData] = useState<ElementData[]>([]); // elementsData로 상태 관리
 
     // 요소 추가 함수 (새로운 객체 형태로 추가)
-    const addElement = (el: React.ReactNode, type: string) => {
+    const addElement = (el: React.ReactNode, type: string, style: string) => {
         const newElementData: ElementData = {
             id: Date.now().toString(), // 고유 ID 부여
             type,
+            style,
             element: el,
             x: 0, // 초기 위치 (x)
             y: 0, // 초기 위치 (y)
@@ -35,8 +37,8 @@ export const useElements = () => {
     };
 
     // 샘플 버튼 생성 함수
-    const createSampleButton = (ButtonComponent: React.ReactNode) => {
-        addElement(ButtonComponent, 'button');
+    const createSampleButton = (ButtonComponent: React.ReactNode, style:string) => {
+        addElement(ButtonComponent, 'button', style);
     };
 
     return { elementsData, createSampleButton, updateElementPosition };
