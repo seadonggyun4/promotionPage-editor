@@ -103,6 +103,10 @@ const ElementsBox = styled.div`
 
 const ElementWrap = styled.div`
     position: absolute;
+
+    &:active{
+        filter: blur(3px);
+    }
 `;
 
 export default Webview;
