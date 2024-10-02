@@ -27,7 +27,8 @@ function ButtonBox() {
                 $backgroundColor={SIMPLE_BTN['backgroundColor']}
                 $textColor={SIMPLE_BTN['textColor']}
                 $borderRadius={SIMPLE_BTN['borderRadius']}
-                target="_blank">
+                target="_blank"
+            >
                 {SIMPLE_BTN['text']}
             </SimpleBtn>,
         GradationBtn:
@@ -38,7 +39,8 @@ function ButtonBox() {
                 $gradationColor3={GRADATION_BTN['gradationColor3']}
                 $gradationColor4={GRADATION_BTN['gradationColor4']}
                 $borderRadius={GRADATION_BTN['borderRadius']}
-                target="_blank">
+                target="_blank"
+            >
                 {GRADATION_BTN['text']}
             </GradationBtn>,
     };

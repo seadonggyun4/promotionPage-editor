@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { ELEMENT_MENU } from '../../../constant/global'
 import backgroundImage from "../../../asset/img/promotionPage.jpeg";
 import { useElementsContext } from "../../../app/provider/ElementsProvider";
 
 interface ElementData {
     id: string;
+    type: string;
     element: React.ReactNode;
     x: number;
     y: number;
@@ -18,9 +20,12 @@ interface WebviewProps {
 function Webview({ elementsData, uploadedImage }: WebviewProps) {
     const { updateElementPosition } = useElementsContext();
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    const [menuActive, setMenuActive] = useState(false);
+
 
     // 드래그 시작 시 오프셋을 계산하여 저장
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: string, elementX: number, elementY: number) => {
+        setMenuActive(false)
         const elementsBox = (e.target as HTMLElement).closest('#elementsBox');
         const boundingRect = elementsBox?.getBoundingClientRect();
 
@@ -54,6 +59,10 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
         e.preventDefault();
     };
 
+    const clickElement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, data: ElementData) => {
+        e.preventDefault()
+        setMenuActive((prev) => !prev)
+    }
     return (
         <div id="rendingPage">
             <WebViewStyle>
@@ -69,9 +78,21 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
                             key={index}
                             style={{ top: `${data.y}%`, left: `${data.x}%`, width: '200px', height:'50px' }}
                             onDragStart={(e) => handleDragStart(e, data.id, data.x, data.y)}
+                            onClick={(e) => clickElement(e, data)}
                             draggable
                         >
                             {data.element}
+                            {
+                                menuActive &&
+                                <ElementMenu>
+                                    {
+                                        data.type &&
+                                        ELEMENT_MENU[data.type as keyof typeof ELEMENT_MENU].map( (menu, index) => (
+                                            <li key={index}>{menu}</li>
+                                        ))
+                                    }
+                                </ElementMenu>
+                            }
                         </ElementWrap>
                     ))}
                 </ElementsBox>
@@ -108,5 +129,41 @@ const ElementWrap = styled.div`
         filter: blur(3px);
     }
 `;
+
+const ElementMenu = styled.ul`
+    margin-top: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    background-color: #ffffff;
+    animation: popUp 0.2s ease-in-out forwards;
+    
+    & li{
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+        
+        &:hover{
+            color: var(--c-text-action);
+            background-color: var(--c-background-quaternary);
+        }
+        
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+
+    @keyframes popUp {
+        0%{
+            transform: scale(0.9);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+`
 
 export default Webview;
