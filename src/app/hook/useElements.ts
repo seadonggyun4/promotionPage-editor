@@ -31,6 +31,15 @@ export const useElements = () => {
         setElementsData((prevElements) => [...prevElements, newElementData]);
     };
 
+    // 요소 업데이트 함수
+    const updateElement = (el: React.ReactNode, id: string, style: string, styleData: { [key: string]: any }) => {
+        setElementsData((prevElements) =>
+            prevElements.map((elem) =>
+                elem.id === id ? { ...elem, element: el, style, styleData } : elem
+            )
+        );
+    };
+
     // 요소의 위치 업데이트 함수
     const updateElementPosition = (id: string, x: number, y: number) => {
         setElementsData((prevElements) =>
@@ -45,9 +54,13 @@ export const useElements = () => {
         addElement(ButtonComponent, 'button', style, styleData, elKey);
     };
 
+    // 샘플 버튼 업데이트 함수
+    const updateSampleButton = (ButtonComponent: React.ReactNode, id: string, style:string, styleData: {[key: string]: any}) => {
+        updateElement(ButtonComponent, id, style, styleData);
+    };
 
 
-    return { elementsData, createSampleButton, updateElementPosition, selected, setSelected };
-};
+
+    return { elementsData, createSampleButton, updateElementPosition, selected, setSelected, updateElement, updateSampleButton };};
 
 export type UseElementsReturnType = ReturnType<typeof useElements>;

@@ -22,7 +22,7 @@ interface ButtonSetModalProps {
 
 
 function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProps) {
-    const {createSampleButton, selected } = useElementsContext()
+    const {createSampleButton, updateSampleButton, selected } = useElementsContext()
     const simpleBtnHook = useSimpleBtn();
     const gradationBtnHook = useGradtionBtn()
 
@@ -35,18 +35,21 @@ function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProp
         const btnHook = buttonHook[selectedBtn];
         if (btnHook) return {
             el : React.cloneElement(children, btnHook.customButton(children)),
-            style: btnHook.buttonStyle
+            styleData: btnHook.buttonStyle
         }
         return {
             el: children,
-            style: {}
+            styleData: {}
         };
     }
 
     const customButton = checkSelectedBtn(selectedBtn as ButtonStyle);
 
     const addButton = () => {
-        if(selected?.id === '') createSampleButton(customButton.el, selectedBtn, customButton.style, Date.now().toString())
+        console.log(customButton.styleData)
+        if(!selected) return
+        if(selected?.id === '') createSampleButton(customButton.el, selectedBtn, customButton.styleData, Date.now().toString())
+        else updateSampleButton(customButton.el, selected?.id, selected?.style, customButton.styleData)
         closeModal()
     }
 
