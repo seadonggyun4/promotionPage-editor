@@ -40,6 +40,11 @@ export const useElements = () => {
         );
     };
 
+    // 요소 제거 함수
+    const removeElement = (id: string) => {
+        setElementsData((prevElements) => prevElements.filter((elem) => elem.id !== id));
+    };
+
     // 요소의 위치 업데이트 함수
     const updateElementPosition = (id: string, x: number, y: number) => {
         setElementsData((prevElements) =>
@@ -61,6 +66,16 @@ export const useElements = () => {
 
 
 
-    return { elementsData, createSampleButton, updateElementPosition, selected, setSelected, updateElement, updateSampleButton };};
+    return {
+        elementsData,
+        createSampleButton,
+        updateElementPosition,
+        selected,
+        setSelected,
+        updateElement,
+        updateSampleButton,
+        removeElement
+    };
+};
 
 export type UseElementsReturnType = ReturnType<typeof useElements>;
