@@ -26,7 +26,7 @@ interface WebviewProps {
 }
 
 function Webview({ elementsData, uploadedImage }: WebviewProps) {
-    const { updateElementPosition, setSelected } = useElementsContext();
+    const { updateElementPosition, setSelected, removeElement } = useElementsContext();
     // const { setSelectedBtn } = useSetButtonContext()
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
     const [menuActive, setMenuActive] = useState('');
@@ -75,9 +75,9 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
         else setMenuActive('')
     }
 
-    const elementMenuClick = (data: ElementData) => {
-        setSelected(data)
-        // setSelectedBtn(data.style as SelectedButtonType);
+    const elementMenuClick = (data: ElementData, menu:string) => {
+        if(menu === '수정') setSelected(data)
+        if(menu === '삭제') removeElement(data?.id)
     }
 
     return (
@@ -105,7 +105,7 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
                                     {
                                         data.type &&
                                         ELEMENT_MENU[data.type as keyof typeof ELEMENT_MENU].map( (menu, index) => (
-                                            <li key={index} onClick={() => elementMenuClick(data)}>{menu}</li>
+                                            <li key={index} onClick={() => elementMenuClick(data, menu)}>{menu}</li>
                                         ))
                                     }
                                 </ElementMenu>
