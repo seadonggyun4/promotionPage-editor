@@ -46,7 +46,6 @@ function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProp
     const customButton = checkSelectedBtn(selectedBtn as ButtonStyle);
 
     const addButton = () => {
-        console.log(customButton.styleData)
         if(!selected) return
         if(selected?.id === '') createSampleButton(customButton.el, selectedBtn, customButton.styleData, Date.now().toString())
         else updateSampleButton(customButton.el, selected?.id, selected?.style, customButton.styleData)
