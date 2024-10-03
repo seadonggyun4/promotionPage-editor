@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import ButtonSetModal from "./ButtonSetModal";
-import { SIMPLE_BTN, GRADATION_BTN } from "../../../constant/button";
-import { useSetButtonContext } from "../provider/setButtonProvider";
+import { BTN_STYLE } from "../../../constant/button";
+import { useElementsContext } from "../../../app/provider/ElementsProvider";
+
+type ButtonStyle = 'SimpleBtn' | 'GradationBtn';
 
 type SimpleBtnProps = {
     $backgroundColor: string;
@@ -20,61 +22,74 @@ type GrationBtnProps = {
 }
 
 function ButtonBox() {
-    const buttonComponents = {
-        SampleBtn:
+    const { selected, setSelected } = useElementsContext()
+    const buttonComponents: { [key in ButtonStyle]: React.ReactElement } = {
+        SimpleBtn:
             <SimpleBtn
-                $backgroundColor={SIMPLE_BTN['backgroundColor']}
-                $textColor={SIMPLE_BTN['textColor']}
-                $borderRadius={SIMPLE_BTN['borderRadius']}
+                $backgroundColor={BTN_STYLE['SimpleBtn']['backgroundColor']}
+                $textColor={BTN_STYLE['SimpleBtn']['textColor']}
+                $borderRadius={BTN_STYLE['SimpleBtn']['borderRadius']}
                 target="_blank"
                 onClick={(e) => {e.preventDefault()}}
             >
-                {SIMPLE_BTN['text']}
+                {BTN_STYLE['SimpleBtn']['buttonText']}
             </SimpleBtn>,
         GradationBtn:
             <GradationBtn
-                $textColor={GRADATION_BTN['textColor']}
-                $gradationColor1={GRADATION_BTN['gradationColor1']}
-                $gradationColor2={GRADATION_BTN['gradationColor2']}
-                $gradationColor3={GRADATION_BTN['gradationColor3']}
-                $gradationColor4={GRADATION_BTN['gradationColor4']}
-                $borderRadius={GRADATION_BTN['borderRadius']}
+                $textColor={BTN_STYLE['GradationBtn']['textColor']}
+                $gradationColor1={BTN_STYLE['GradationBtn']['gradationColor1']}
+                $gradationColor2={BTN_STYLE['GradationBtn']['gradationColor2']}
+                $gradationColor3={BTN_STYLE['GradationBtn']['gradationColor3']}
+                $gradationColor4={BTN_STYLE['GradationBtn']['gradationColor4']}
+                $borderRadius={BTN_STYLE['GradationBtn']['borderRadius']}
                 target="_blank"
                 onClick={(e) => {e.preventDefault()}}
             >
-                {GRADATION_BTN['text']}
+                {BTN_STYLE['GradationBtn']['buttonText']}
             </GradationBtn>,
     };
-    const {selectedBtn, setSelectedBtn} = useSetButtonContext()
+
+
+    const setSelectedBtn = (style: ButtonStyle) => {
+        setSelected({
+            id: '',
+            type: 'button',
+            style,
+            styleData: BTN_STYLE[style],
+            element: buttonComponents[style],
+            x: 0,
+            y: 0
+        })
+    }
 
     return (
         <ButtonBoxStyle>
             <Title>버튼 카테고리</Title>
             <div style={{height: '50px', width: '100%'}}>
                 <SimpleBtn
-                    $backgroundColor={SIMPLE_BTN['backgroundColor']}
-                    $textColor={SIMPLE_BTN['textColor']}
-                    $borderRadius={SIMPLE_BTN['borderRadius']}
-                    onClick={() => setSelectedBtn('SampleBtn')}>
-                    {SIMPLE_BTN['text']}
+                    $backgroundColor={BTN_STYLE['SimpleBtn']['backgroundColor']}
+                    $textColor={BTN_STYLE['SimpleBtn']['textColor']}
+                    $borderRadius={BTN_STYLE['SimpleBtn']['borderRadius']}
+                    onClick={() => setSelectedBtn('SimpleBtn')}>
+                    {BTN_STYLE['SimpleBtn']['buttonText']}
                 </SimpleBtn>
             </div>
             <div style={{height: '50px', width: '100%'}}>
                 <GradationBtn
-                    $textColor={GRADATION_BTN['textColor']}
-                    $gradationColor1={GRADATION_BTN['gradationColor1']}
-                    $gradationColor2={GRADATION_BTN['gradationColor2']}
-                    $gradationColor3={GRADATION_BTN['gradationColor3']}
-                    $gradationColor4={GRADATION_BTN['gradationColor4']}
-                    $borderRadius={GRADATION_BTN['borderRadius']}
+                    $textColor={BTN_STYLE['GradationBtn']['textColor']}
+                    $gradationColor1={BTN_STYLE['GradationBtn']['gradationColor1']}
+                    $gradationColor2={BTN_STYLE['GradationBtn']['gradationColor2']}
+                    $gradationColor3={BTN_STYLE['GradationBtn']['gradationColor3']}
+                    $gradationColor4={BTN_STYLE['GradationBtn']['gradationColor4']}
+                    $borderRadius={BTN_STYLE['GradationBtn']['borderRadius']}
                     onClick={() => setSelectedBtn('GradationBtn')}>
-                    {GRADATION_BTN['text']}
+                    {BTN_STYLE['GradationBtn']['buttonText']}
                 </GradationBtn>
             </div>
             {
-                selectedBtn &&
-                <ButtonSetModal selectedBtn={selectedBtn} closeModal={() => setSelectedBtn(null)}>
-                    {buttonComponents[selectedBtn]}
+                selected?.type === 'button' &&
+                <ButtonSetModal selectedBtn={selected?.style} closeModal={() => setSelected(null)}>
+                    {buttonComponents[selected.style as ButtonStyle]}
                 </ButtonSetModal>
             }
         </ButtonBoxStyle>

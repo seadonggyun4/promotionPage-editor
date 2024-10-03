@@ -1,5 +1,6 @@
-import React, {ChangeEvent, Dispatch, SetStateAction} from "react";
+import React, {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
 import styled from "styled-components";
+import { useElementsContext } from "../../../app/provider/ElementsProvider";
 
 interface gradationBtnHook {
     menu: string[],
@@ -36,6 +37,7 @@ interface gradationBtnHook {
 }
 
 function GradationBtnForm({gradationBtnHook}: { gradationBtnHook: gradationBtnHook }) {
+    const { selected } = useElementsContext()
     const {
         menu,
         menuActive,
@@ -69,6 +71,24 @@ function GradationBtnForm({gradationBtnHook}: { gradationBtnHook: gradationBtnHo
         shadowColor,
         handleShadowColorChange,
     } = gradationBtnHook;
+
+    useEffect(() => {
+        if(selected?.id === '') return
+        handleTextChange({ target: { value: selected?.styleData.buttonText } } as ChangeEvent<HTMLInputElement>)
+        handleLinkChange({ target: { value: selected?.styleData.buttonLink } } as ChangeEvent<HTMLInputElement>)
+        handleTextColorChange({ target: { value: selected?.styleData.textColor } } as ChangeEvent<HTMLInputElement>)
+        handleGradationColor1Change({ target: { value: selected?.styleData.gradationColor1 } } as ChangeEvent<HTMLInputElement>)
+        handleGradationColor2Change({ target: { value: selected?.styleData.gradationColor2 } } as ChangeEvent<HTMLInputElement>)
+        handleGradationColor3Change({ target: { value: selected?.styleData.gradationColor3 } } as ChangeEvent<HTMLInputElement>)
+        handleGradationColor4Change({ target: { value: selected?.styleData.gradationColor4 } } as ChangeEvent<HTMLInputElement>)
+        handleBorderRadiusChange({ target: { value: selected?.styleData.borderRadius } } as ChangeEvent<HTMLInputElement>)
+        handleBorderWidthChange({ target: { value: selected?.styleData.borderWidth } } as ChangeEvent<HTMLInputElement>)
+        handleBorderColorChange({ target: { value: selected?.styleData.borderColor } } as ChangeEvent<HTMLInputElement>)
+        handleShadowOffsetXChange({ target: { value: selected?.styleData.shadowOffsetX } } as ChangeEvent<HTMLInputElement>)
+        handleShadowOffsetYChange({ target: { value: selected?.styleData.shadowOffsetY } } as ChangeEvent<HTMLInputElement>)
+        handleShadowBlurRadiusChange({ target: { value: selected?.styleData.shadowBlurRadius } } as ChangeEvent<HTMLInputElement>)
+        handleShadowColorChange({ target: { value: selected?.styleData.shadowColor } } as ChangeEvent<HTMLInputElement>)
+    },[])
 
     return (
         <>

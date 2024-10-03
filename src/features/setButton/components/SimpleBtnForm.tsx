@@ -1,5 +1,6 @@
-import React, {ChangeEvent, Dispatch, SetStateAction} from "react";
+import React, {ChangeEvent, Dispatch, SetStateAction, useEffect} from "react";
 import styled from "styled-components";
+import { useElementsContext } from "../../../app/provider/ElementsProvider";
 
 interface SimpleBtnHook {
     menu: string[],
@@ -30,6 +31,7 @@ interface SimpleBtnHook {
 }
 
 function SimpleBtnForm({simpleBtnHook}: { simpleBtnHook: SimpleBtnHook }) {
+    const { selected } = useElementsContext()
     const {
         menu,
         menuActive,
@@ -57,6 +59,21 @@ function SimpleBtnForm({simpleBtnHook}: { simpleBtnHook: SimpleBtnHook }) {
         shadowColor,
         handleShadowColorChange,
     } = simpleBtnHook;
+
+    useEffect(() => {
+        if(selected?.id === '') return
+        handleTextChange({ target: { value: selected?.styleData.buttonText } } as ChangeEvent<HTMLInputElement>)
+        handleLinkChange({ target: { value: selected?.styleData.buttonLink } } as ChangeEvent<HTMLInputElement>)
+        handleTextColorChange({ target: { value: selected?.styleData.textColor } } as ChangeEvent<HTMLInputElement>)
+        handleBackgroundColorChange({ target: { value: selected?.styleData.backgroundColor } } as ChangeEvent<HTMLInputElement>)
+        handleBorderRadiusChange({ target: { value: selected?.styleData.borderRadius } } as ChangeEvent<HTMLInputElement>)
+        handleBorderWidthChange({ target: { value: selected?.styleData.borderWidth } } as ChangeEvent<HTMLInputElement>)
+        handleBorderColorChange({ target: { value: selected?.styleData.borderColor } } as ChangeEvent<HTMLInputElement>)
+        handleShadowOffsetXChange({ target: { value: selected?.styleData.shadowOffsetX } } as ChangeEvent<HTMLInputElement>)
+        handleShadowOffsetYChange({ target: { value: selected?.styleData.shadowOffsetY } } as ChangeEvent<HTMLInputElement>)
+        handleShadowBlurRadiusChange({ target: { value: selected?.styleData.shadowBlurRadius } } as ChangeEvent<HTMLInputElement>)
+        handleShadowColorChange({ target: { value: selected?.styleData.shadowColor } } as ChangeEvent<HTMLInputElement>)
+    },[])
 
     return (
         <>

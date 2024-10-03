@@ -11,8 +11,8 @@ const menu = [
 export function useSimpleBtn() {
     const [menuActive, setMenuActive] = useState(menu[0]);
 
-    const [buttonText, setButtonText] = useState(SIMPLE_BTN['text']);
-    const [buttonLink, setButtonLink] = useState(SIMPLE_BTN['link']);
+    const [buttonText, setButtonText] = useState(SIMPLE_BTN['buttonText']);
+    const [buttonLink, setButtonLink] = useState(SIMPLE_BTN['buttonLink']);
     const [textColor, setTextColor] = useState(SIMPLE_BTN['textColor']);
     const [backgroundColor, setBackgroundColor] = useState(SIMPLE_BTN['backgroundColor']);
     const [borderRadius, setBorderRadius] = useState(SIMPLE_BTN['borderRadius']);
@@ -53,6 +53,20 @@ export function useSimpleBtn() {
         }
     }
 
+    const buttonStyle = {
+        buttonText,
+        buttonLink,
+        textColor,
+        backgroundColor,
+        borderRadius,
+        borderWidth,
+        borderColor,
+        shadowOffsetX,
+        shadowOffsetY,
+        shadowBlurRadius,
+        shadowColor
+    }
+
     return {
         menu,
         menuActive,
@@ -80,5 +94,6 @@ export function useSimpleBtn() {
         shadowColor,
         handleShadowColorChange,
         customButton,
+        buttonStyle,
     };
 }

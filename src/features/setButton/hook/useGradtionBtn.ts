@@ -11,8 +11,8 @@ const menu = [
 export function useGradtionBtn() {
     const [menuActive, setMenuActive] = useState(menu[0]);
 
-    const [buttonText, setButtonText] = useState(GRADATION_BTN['text']);
-    const [buttonLink, setButtonLink] = useState(GRADATION_BTN['link']);
+    const [buttonText, setButtonText] = useState(GRADATION_BTN['buttonText']);
+    const [buttonLink, setButtonLink] = useState(GRADATION_BTN['buttonLink']);
     const [textColor, setTextColor] = useState(GRADATION_BTN['textColor']);
     const [gradationColor1, setGradationColor1] = useState(GRADATION_BTN['gradationColor1']);
     const [gradationColor2, setGradationColor2] = useState(GRADATION_BTN['gradationColor2']);
@@ -60,6 +60,23 @@ export function useGradtionBtn() {
         }
     }
 
+    const buttonStyle = {
+        buttonText,
+        buttonLink,
+        textColor,
+        gradationColor1,
+        gradationColor2,
+        gradationColor3,
+        gradationColor4,
+        borderRadius,
+        borderWidth,
+        borderColor,
+        shadowOffsetX,
+        shadowOffsetY,
+        shadowBlurRadius,
+        shadowColor
+    }
+
     return {
         menu,
         menuActive,
@@ -93,5 +110,6 @@ export function useGradtionBtn() {
         shadowColor,
         handleShadowColorChange,
         customButton,
+        buttonStyle
     };
 }

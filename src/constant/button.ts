@@ -1,6 +1,6 @@
 export const SIMPLE_BTN  = {
-    text: '심플 버튼',
-    link: '',
+    buttonText: '심플 버튼',
+    buttonLink: '',
     textColor: '#ffffff',
     backgroundColor: '#434ce8',
     borderRadius: '5',
@@ -13,8 +13,8 @@ export const SIMPLE_BTN  = {
 }
 
 export const GRADATION_BTN = {
-    text: '그라데이션 버튼',
-    link: '',
+    buttonText: '그라데이션 버튼',
+    buttonLink: '',
     textColor: '#ffffff',
     gradationColor1: '#03a9f4',
     gradationColor2: '#434ce8',
@@ -27,4 +27,36 @@ export const GRADATION_BTN = {
     shadowOffsetY: '0',
     shadowBlurRadius: '0',
     shadowColor:'',
+}
+
+export const BTN_STYLE = {
+    SimpleBtn: {
+        buttonText: '심플 버튼',
+        buttonLink: '',
+        textColor: '#ffffff',
+        backgroundColor: '#434ce8',
+        borderRadius: '5',
+        borderWidth: '0',
+        borderColor: '',
+        shadowOffsetX: '0',
+        shadowOffsetY: '0',
+        shadowBlurRadius: '0',
+        shadowColor:'',
+    },
+    GradationBtn: {
+        buttonText: '그라데이션 버튼',
+        buttonLink: '',
+        textColor: '#ffffff',
+        gradationColor1: '#03a9f4',
+        gradationColor2: '#434ce8',
+        gradationColor3: '#404089',
+        gradationColor4: '#03a9f4',
+        borderRadius: '20',
+        borderWidth: '0',
+        borderColor: '',
+        shadowOffsetX: '0',
+        shadowOffsetY: '0',
+        shadowBlurRadius: '0',
+        shadowColor:'',
+    }
 }

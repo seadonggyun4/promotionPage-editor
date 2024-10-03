@@ -5,15 +5,16 @@ import { ELEMENT_MENU } from '../../../constant/global'
 import backgroundImage from "../../../asset/img/promotionPage.jpeg";
 
 import { useElementsContext } from "../../../app/provider/ElementsProvider";
-import { useSetButtonContext } from "../../../features/setButton/provider/setButtonProvider";
+// import { useSetButtonContext } from "../../../features/setButton/provider/setButtonProvider";
 
-type SelectedButtonType = 'SampleBtn' | 'GradationBtn' | null;
+// type SelectedButtonType = 'SampleBtn' | 'GradationBtn' | null;
 
 
 interface ElementData {
     id: string;
     type: string;
     style: string;
+    styleData: { [key: string]: any };
     element: React.ReactNode;
     x: number;
     y: number;
@@ -25,8 +26,8 @@ interface WebviewProps {
 }
 
 function Webview({ elementsData, uploadedImage }: WebviewProps) {
-    const { updateElementPosition } = useElementsContext();
-    const { setSelectedBtn } = useSetButtonContext()
+    const { updateElementPosition, setSelected } = useElementsContext();
+    // const { setSelectedBtn } = useSetButtonContext()
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
     const [menuActive, setMenuActive] = useState('');
 
@@ -74,8 +75,9 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
         else setMenuActive('')
     }
 
-    const elementMenuClick = (data: ElementData, menu: string) => {
-       setSelectedBtn(data.style as SelectedButtonType);
+    const elementMenuClick = (data: ElementData) => {
+        setSelected(data)
+        // setSelectedBtn(data.style as SelectedButtonType);
     }
 
     return (
@@ -103,7 +105,7 @@ function Webview({ elementsData, uploadedImage }: WebviewProps) {
                                     {
                                         data.type &&
                                         ELEMENT_MENU[data.type as keyof typeof ELEMENT_MENU].map( (menu, index) => (
-                                            <li key={index} onClick={() => elementMenuClick(data, menu)}>{menu}</li>
+                                            <li key={index} onClick={() => elementMenuClick(data)}>{menu}</li>
                                         ))
                                     }
                                 </ElementMenu>

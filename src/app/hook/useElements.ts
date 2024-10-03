@@ -6,6 +6,7 @@ interface ElementData {
     id: string;
     type: string;
     style: string;
+    styleData: { [key: string]: any };
     element: React.ReactNode;
     x: number;
     y: number;
@@ -13,16 +14,19 @@ interface ElementData {
 
 export const useElements = () => {
     const [elementsData, setElementsData] = useState<ElementData[]>([]); // elementsData로 상태 관리
+    const [selected, setSelected] = useState<ElementData | null>(null);
+
 
     // 요소 추가 함수 (새로운 객체 형태로 추가)
-    const addElement = (el: React.ReactNode, type: string, style: string) => {
+    const addElement = (el: React.ReactNode, type: string, style: string, styleData: {[key: string]: string}, elKey: string) => {
         const newElementData: ElementData = {
-            id: Date.now().toString(), // 고유 ID 부여
+            id: elKey,
             type,
             style,
             element: el,
             x: 0, // 초기 위치 (x)
             y: 0, // 초기 위치 (y)
+            styleData,
         };
         setElementsData((prevElements) => [...prevElements, newElementData]);
     };
@@ -37,11 +41,13 @@ export const useElements = () => {
     };
 
     // 샘플 버튼 생성 함수
-    const createSampleButton = (ButtonComponent: React.ReactNode, style:string) => {
-        addElement(ButtonComponent, 'button', style);
+    const createSampleButton = (ButtonComponent: React.ReactNode, style:string, styleData: {[key: string]: any}, elKey: string) => {
+        addElement(ButtonComponent, 'button', style, styleData, elKey);
     };
 
-    return { elementsData, createSampleButton, updateElementPosition };
+
+
+    return { elementsData, createSampleButton, updateElementPosition, selected, setSelected };
 };
 
 export type UseElementsReturnType = ReturnType<typeof useElements>;

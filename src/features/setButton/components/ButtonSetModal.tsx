@@ -6,9 +6,12 @@ import SimpleBtnForm from "./SimpleBtnForm";
 import GradationBtnForm from "./GradationBtnForm";
 
 // hook & Provider
-import { useElementsContext } from "../../..//app/provider/ElementsProvider";
+import { useElementsContext } from "../../../app/provider/ElementsProvider";
 import { useSimpleBtn } from "../hook/useSimpleBtn";
 import { useGradtionBtn } from "../hook/useGradtionBtn";
+
+type ButtonStyle = 'SimpleBtn' | 'GradationBtn';
+
 
 interface ButtonSetModalProps {
     selectedBtn: string;
@@ -16,25 +19,34 @@ interface ButtonSetModalProps {
     children: React.ReactElement;
 }
 
+
+
 function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProps) {
-    const { createSampleButton } = useElementsContext()
+    const {createSampleButton, selected } = useElementsContext()
     const simpleBtnHook = useSimpleBtn();
     const gradationBtnHook = useGradtionBtn()
 
-    const checkSelectedBtn = (selectedBtn : string) => {
-        if (selectedBtn === 'SampleBtn') {
-            return React.cloneElement(children, simpleBtnHook.customButton(children));
-        }
-        if (selectedBtn === 'GradationBtn') {
-            return React.cloneElement(children, gradationBtnHook.customButton(children));
-        }
-        return children;
+    const buttonHook = {
+        SimpleBtn: simpleBtnHook,
+        GradationBtn: gradationBtnHook
     }
 
-    const customButton = checkSelectedBtn(selectedBtn);
+    const checkSelectedBtn = (selectedBtn : ButtonStyle) => {
+        const btnHook = buttonHook[selectedBtn];
+        if (btnHook) return {
+            el : React.cloneElement(children, btnHook.customButton(children)),
+            style: btnHook.buttonStyle
+        }
+        return {
+            el: children,
+            style: {}
+        };
+    }
+
+    const customButton = checkSelectedBtn(selectedBtn as ButtonStyle);
 
     const addButton = () => {
-        createSampleButton(customButton, selectedBtn)
+        if(selected?.id === '') createSampleButton(customButton.el, selectedBtn, customButton.style, Date.now().toString())
         closeModal()
     }
 
@@ -43,11 +55,11 @@ function ButtonSetModal ({selectedBtn, closeModal, children}: ButtonSetModalProp
             <ModalInner>
                 <ElementWrapper>
                     <div style={{width: '200px'}}>
-                        {customButton}
+                        {customButton.el}
                     </div>
                 </ElementWrapper>
                 <ElementSettingBox>
-                    { selectedBtn === 'SampleBtn' && <SimpleBtnForm simpleBtnHook={simpleBtnHook}/> }
+                    { selectedBtn === 'SimpleBtn' && <SimpleBtnForm simpleBtnHook={simpleBtnHook} /> }
                     { selectedBtn === 'GradationBtn' && <GradationBtnForm gradationBtnHook={gradationBtnHook}/> }
                     <BtnWrapper>
                     <button className="activeBtn" onClick={addButton}>등록</button>
