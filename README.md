@@ -1,6 +1,8 @@
 # Promotion Page Editor
-Promotion Page Editor는 TypeScript 언어 와 React를 이용하여 개발되었습니다. <br>
-이 프로젝트의 주 목적은 사용자가 사용하기 간편하게 프로모션 페이지를 편집할 수 있도록 지원하는 것입니다. <br>
+The Promotion Page Editor is a software application developed using the TypeScript language and the React JavaScript framework. <br>
+The primary purpose of this project is to provide a user-friendly interface for editing promotion pages with ease. <br>
+It's an MVP model devised with the intent to minimize the time spent on constantly updating and <br>
+creating promotion pages at our company, allowing the main development team to focus their efforts more productively. <br>
 
 ## Dependencies
 |    **Package**  | **Version** | **Description** |
