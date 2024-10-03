@@ -7,6 +7,13 @@ creating promotion pages at our company, allowing the main development team to f
 
 <br>
 
+## Version
+|    **Version**  |  **Description**   |
+|:---------------:|:------------------:|
+| 0.1.0 | first Application. |
+
+<br>
+
 ## Dependencies
 |    **Package**  | **Version** | **Description** |
 |:---------------:|:-----------:|:---------------:|
